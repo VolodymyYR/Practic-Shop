@@ -1,0 +1,63 @@
+[
+    {
+        "image": "kigurumi-slippers/авокадо/slippers.png",
+        "id": 1,
+        "name": "Авокадо",
+        "price": 799,
+        "priceOld": 1000,
+        "category": ["slippers", "descant"]
+    },
+    {
+        "image": "kigurumi-slippers/акула-блакитна/shark.png",
+        "id": 2,
+        "name": "Блакитна Акула»",
+        "price": 590,
+        "priceOld": 700,
+        "category": ["slippers", "descant"]
+    },
+    {
+        "image": "soft-chairs/динозавр/dino.png",
+        "id": 3,
+        "name": "Динозавр",
+        "price": 1499,
+        "priceOld": 1900,
+        "category": ["chairs", "descant"]
+
+    },
+    {
+        "image": "soft-chairs/стіч/stich.png",
+        "id": 4,
+        "name": "Стіч",
+        "price": 1499,
+        "category": "chairs"
+    },
+    {
+        "image": "soft-chairs/панда/panda.png",
+        "id": 5,
+        "name": "Панда",
+        "price": 1250,
+        "priceOld": 1500,
+        "category": ["chairs", "descant"]
+    },
+    {
+        "image": "soft-chairs/лев/lione.png",
+        "id": 6,
+        "name": "Лев",
+        "price": 1550,
+        "category": ["chairs", "descant"]
+    },
+    {
+        "image": "soft-toys/мякі-іграшки/пікачу/pickachy.png",
+        "id": 7,
+        "name": "Пікачу",
+        "price": 799,
+        "category": "toys"
+    },
+    {
+        "image": "soft-toys/мякі-іграшки/авокадо/avocado.png",
+        "id": 8,
+        "name": "Авокадо",
+        "price": 1499,
+        "category": "toys"
+    }
+]

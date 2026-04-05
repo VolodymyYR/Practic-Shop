@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleReset.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+
+        <header class="header">
+            <div class="header__container">
+
+                <h1>Only Shop</h1>
+
+                <nav class="header__nav">
+                    <ul class="header__nav-list">
+                        <li class="header__nav-item"><a href="#">Home</a></li>
+                        <li class="header__nav-item"><a href="#">Products</a></li>
+                        <li class="header__nav-item"><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header__actions actions-header">
+                    <div class="actions-header__products products-actions-header">
+                        <a class="products-actions-header__link cart-link" id="header-cart" href="#">Products</a>
+                        <a class="products-actions-header__link favorit-link" id="header-favorit" href="#">Products</a>
+                    </div>
+                    <a href="#" class="actions-header__profile" id="header-profile"></a>
+                </div>
+
+            </div>
+        </header>
+
+        <main class="main">
+
+            <div class="main__intro intro">
+                <div class="intro__container">
+                    <div class="intro__content">
+                        <h2 class="intro__title">Welcome to Only Shop</h2>
+                        <p class="intro__text">Discover our exclusive collection of products and enjoy a seamless shopping experience.</p>
+                        <a href="#" class="intro__button">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main__shop shop">
+                <div class="shop__container">
+
+                    <aside class="shop__aside">
+                        <div class="shop__filter filter">
+                            <h2>Фільтер</h2>
+
+                            <div class="filter__group group-filter group-filter--categorys">
+                                <h3 class="group-filter__title">Катагеорія:</h3>
+                                <label class="group-filter__category" for="laptops"><input type="checkbox" value="laptops" name="categoryFilter" id="laptops">Laptops</label>
+                                <label class="group-filter__category" for="toys"><input type="checkbox" value="toys" name="categoryFilter" id="toys">Toys</label>
+                                <label class="group-filter__category" for="slippers"><input type="checkbox" value="slippers" name="categoryFilter" id="slippers">Slippers</label>
+                                <label class="group-filter__category" for="chairs"><input type="checkbox" value="chairs" name="categoryFilter" id="chairs">Chairs</label>
+                                <label class="group-filter__category" for="descant"><input type="checkbox" value="descant" name="categoryFilter" id="descant">Акція</label>
+                            </div>
+
+                            <div class="filter__group group-filter">
+                                <h3 class="group-filter__title">Ціна:</h3>
+                                <div class="price-input-container">
+                                    <div class="field">
+                                        <span>Мін.</span>
+                                        <input type="number" class="input-min" value="2500">
+                                    </div>
+                                    <div class="separator">-</div>
+                                    <div class="field">
+                                        <span>Макс.</span>
+                                        <input type="number" class="input-max" value="7500">
+                                    </div>
+                                </div>
+
+                                <div class="slider-container">
+                                    <div class="price-slider">
+                                        <div class="progress"></div>
+                                    </div>
+                                    <div class="range-input">
+                                        <input type="range" class="range-min" min="0" max="100" value="0" step="10">
+                                        <input type="range" class="range-max" min="0" max="100" value="100" step="10">
+                                    </div>
+                                </div>
+
+                                <button class="filter-btn">Застосувати</button>
+                            </div>
+
+                            <button class="filter__button button-filter" id="resetFilter">Скинути</button>
+
+                        </div>
+                    </aside>
+
+                    <div class="shop__content content-shop">
+                        <div class="content-shop__items">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+        <footer class="footer">
+            <div class="footer__container">tut</div>
+        </footer>
+    </div>
+</body>
+<script src="script.js" defer></script>
+</html>

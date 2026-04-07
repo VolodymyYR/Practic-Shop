@@ -74,6 +74,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const discountBadge = (itemProduct) => itemProduct.category.includes('descant') ? `<div class="item-content-shop__discount run-row" data-speed="4" data-gap="10" data-pause="true" data-split="😁">Акція</div>` : '';
 
+        let star;
+        const starsBlock = (itemProduct) => {
+            if (!itemProduct.rating) return '';
+            return star = `
+                <div class="rating-stars" style="--rating-percent: ${itemProduct.rating ? (itemProduct.rating / 5) * 100 : 0}%;"></div>
+            `;   
+        }
+
         productList.innerHTML = "";
         const productCards = products.map(product => `
             <div class="content-shop__item item-content-shop">
@@ -83,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="item-content-shop__info">
                     <h2 class="item-content-shop__title">${nameCategory(product)}</h2>
                     ${priceBlock(product)}
+                    ${starsBlock(product)}
                 </div>
                 <button class="item-content-shop__by">Купити</button>
                 ${discountBadge(product)}
@@ -318,8 +327,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // ======================================================
     // ======================================================
 
-
-    runRow();
     initApp();
 }); 
 

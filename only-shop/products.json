@@ -5,15 +5,17 @@
         "name": "Авокадо",
         "price": 799,
         "priceOld": 1000,
-        "category": ["slippers", "descant"]
+        "category": ["slippers", "descant"],
+        "rating": 4.5
     },
     {
         "image": "kigurumi-slippers/акула-блакитна/shark.png",
         "id": 2,
-        "name": "Блакитна Акула»",
+        "name": "Блакитна Акула",
         "price": 590,
         "priceOld": 700,
-        "category": ["slippers", "descant"]
+        "category": ["slippers", "descant"],
+        "rating": 4.1
     },
     {
         "image": "soft-chairs/динозавр/dino.png",
@@ -21,8 +23,8 @@
         "name": "Динозавр",
         "price": 1499,
         "priceOld": 1900,
-        "category": ["chairs", "descant"]
-
+        "category": ["chairs", "descant"],
+        "rating": 3.3
     },
     {
         "image": "soft-chairs/стіч/stich.png",

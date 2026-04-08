@@ -1,0 +1,141 @@
+.filter {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.15);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+}
+
+/* Група фільтрів =================================================== */
+
+.group-filter .group-filter__title {
+    padding-bottom: 15px;
+}
+
+.group-filter--categorys {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    row-gap: 10px;
+}
+
+.group-filter--categorys input {
+    margin-right: 8px;
+}
+.group-filter__title {
+    font-weight: 700;
+    text-transform: capitalize;
+}
+.group-filter__item {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+}
+
+/* Кнопка фільтра ===================================================== */
+
+.button-filter {
+    padding: 8px 14px;
+    width: 100%;
+    border-radius: 10px;
+    background: #fff;
+}
+
+/* Фільтр ціни ======================================================== */
+
+.price-filter {
+    width: 100%;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    font-family: sans-serif;
+}
+
+.price-input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.price-input-container .field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.field input {
+    height: 35px;
+    outline: none;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 0 10px;
+    background: #fff;
+}
+
+.separator {
+    margin: 20px 10px 0;
+    font-size: 19px;
+}
+
+/* ----- Стилізація слайдера -------*/
+.slider-container {
+    height: 5px;
+    position: relative;
+    background: #ddd;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.progress {
+    height: 100%;
+    left: 25%;
+    right: 25%;
+    position: absolute;
+    border-radius: 5px;
+    background: #2563eb;
+}
+
+.range-input {
+    position: relative;
+}
+
+.range-input input {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background: none;
+    pointer-events: none;
+    -webkit-appearance: none;
+}
+
+/*-------------- Стиль "ручок" повзунка ---------------*/
+input[type="range"]::-webkit-slider-thumb {
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+    background: #2563eb;
+    pointer-events: auto;
+    -webkit-appearance: none;
+    box-shadow: 0 0 6px rgba(0,0,0,0.05);
+    cursor: pointer;
+    z-index: 10;
+}
+
+.filter-btn {
+    width: 100%;
+    padding: 10px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.filter-btn:hover {
+    background: #1d4ed8;
+}

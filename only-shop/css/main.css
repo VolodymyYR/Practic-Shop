@@ -1,0 +1,32 @@
+@import url('./filterProducts.css');
+@import url('./header.css');
+@import url('./structure/intro.css');
+@import url('./structure/shop.css');
+@import url('./cardProduct.css');
+@import url('./variables.css');
+@import url('./components.css');
+
+/* ================================================================= */
+/* ================================================================= */
+/* ================================================================= */
+
+.main {
+}
+
+/* -------------------------- */
+
+.content-shop {
+    flex: 1 1 auto;
+}
+.content-shop__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 400px));
+    justify-content: space-around;
+    column-gap: 30px;
+    row-gap: 40px;
+    width: 100%;
+}
+
+/* =================================== */
+/* =================================== */
+/* =================================== */

@@ -1,0 +1,25 @@
+.shop {
+    padding: 80px 0;
+}
+.shop__container {
+    display: flex;
+    column-gap: 40px;
+}
+
+.shop__aside {
+    flex: 0 0 320px;
+}
+
+/* -------------------------- */
+
+.content-shop {
+    flex: 1 1 auto;
+}
+.content-shop__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 400px));
+    justify-content: space-around;
+    column-gap: 30px;
+    row-gap: 40px;
+    width: 100%;
+}

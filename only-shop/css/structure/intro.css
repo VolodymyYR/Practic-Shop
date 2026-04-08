@@ -1,0 +1,41 @@
+.intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    min-height: 600px; /* Для малих екранів */
+    width: 100%;
+
+    background: #022d78;
+    background: -webkit-linear-gradient(0deg, rgba(2, 45, 120, 1) 0%, rgba(2, 17, 51, 1) 47%, rgba(0, 1, 5, 1) 100%);
+    background: -moz-linear-gradient(0deg, rgba(2, 45, 120, 1) 0%, rgba(2, 17, 51, 1) 47%, rgba(0, 1, 5, 1) 100%);
+    background: linear-gradient(0deg, rgba(2, 45, 120, 1) 0%, rgba(2, 17, 51, 1) 47%, rgba(0, 1, 5, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#022D78", endColorstr="#000105", GradientType=0);
+
+    color: #fff;
+}
+.intro__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}
+.intro__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    text-align: center;
+
+    row-gap: 25px;
+}
+
+.intro__title {
+    font-size: 32px;
+    font-weight: 700;
+}
+.intro__text {
+}
+.intro__button {
+}

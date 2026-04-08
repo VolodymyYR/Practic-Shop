@@ -149,7 +149,7 @@
     font-weight: 700;
     text-transform: capitalize;
 }
-.group-filter__category {
+.group-filter__item {
     display: flex;
     align-items: center;
     column-gap: 8px;

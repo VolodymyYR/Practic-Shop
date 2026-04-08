@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="styleReset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styleReset.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
     <title>Document</title>
 </head>
@@ -56,11 +56,10 @@
 
                             <div class="filter__group group-filter group-filter--categorys">
                                 <h3 class="group-filter__title">Катагеорія:</h3>
-                                <label class="group-filter__category" for="laptops"><input type="checkbox" value="laptops" name="categoryFilter" id="laptops">Laptops</label>
-                                <label class="group-filter__category" for="toys"><input type="checkbox" value="toys" name="categoryFilter" id="toys">Toys</label>
-                                <label class="group-filter__category" for="slippers"><input type="checkbox" value="slippers" name="categoryFilter" id="slippers">Slippers</label>
-                                <label class="group-filter__category" for="chairs"><input type="checkbox" value="chairs" name="categoryFilter" id="chairs">Chairs</label>
-                                <label class="group-filter__category" for="descant"><input type="checkbox" value="descant" name="categoryFilter" id="descant">Акція</label>
+                                <label class="group-filter__item category" for="laptops"><input type="checkbox" value="laptops" name="categoryFilter" id="laptops">Laptops</label>
+                                <label class="group-filter__item category" for="toys"><input type="checkbox" value="toys" name="categoryFilter" id="toys">Toys</label>
+                                <label class="group-filter__item category" for="slippers"><input type="checkbox" value="slippers" name="categoryFilter" id="slippers">Slippers</label>
+                                <label class="group-filter__item category" for="chairs"><input type="checkbox" value="chairs" name="categoryFilter" id="chairs">Chairs</label>
                             </div>
 
                             <div class="filter__group group-filter">
@@ -86,18 +85,21 @@
                                         <input type="range" class="range-max" min="0" max="100" value="100" step="10">
                                     </div>
                                 </div>
-
-                                <button class="filter-btn">Застосувати</button>
                             </div>
 
-                            <button class="filter__button button-filter" id="resetFilter">Скинути</button>
+                            <div class="filter__group group-filter group-filter--categorys">
+                                <h3 class="group-filter__title">Спеціальні пропозиції:</h3>
+                                <label class="group-filter__item special-offer" for="test"><input type="checkbox" value="test" name="specialOffer" id="test">Акція</label>
+                            </div>
+
+                            <button class="filter-btn">Застосувати</button>
+                            <button class="filter__button restart-filter" id="resetFilter">Скинути</button>
 
                         </div>
                     </aside>
 
                     <div class="shop__content content-shop">
                         <div class="content-shop__items">
-
                         </div>
                     </div>
 
@@ -110,5 +112,5 @@
         </footer>
     </div>
 </body>
-<script type="module" src="script.js" defer></script>
+<script type="module" src="js/main.js" defer></script>
 </html>

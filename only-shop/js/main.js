@@ -32,4 +32,19 @@ filterBtn.addEventListener("click", () => {
 })
 
 
+function loadComponent(id, path) {
+    fetch(path)
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById(id).innerHTML = data;
+        })
+        .catch(error => console.error(`Error loading component ${id}:`, error));
+}
+
+loadComponent("main-header", "html/header.html");
+loadComponent("main-footer", "html/footer.html");
+
 document.addEventListener("DOMContentLoaded", initApp);

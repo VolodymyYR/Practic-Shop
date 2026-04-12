@@ -85,5 +85,13 @@ public class Product
         _categories.Add(category);
     }
 
-    // Додати ще видалення категорії
+    public void RemoveCategory(ProductCategory category)
+    {
+        if (!_categories.Contains(category))
+        {
+            throw new Exception("Категорія для видалення відсутня!");
+        }
+        
+        _categories.Remove(category);
+    }
 }

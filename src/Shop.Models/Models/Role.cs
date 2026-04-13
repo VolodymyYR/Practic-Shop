@@ -13,7 +13,7 @@ public class Role
             throw new Exception("Cannot duplicate permissions");
         }
 
-        _rolePermissions.Add(new RolePermission(this.Id, permissionId));
+        _rolePermissions.Add(new RolePermission(permissionId));
     }
 
     public void RemoveRolePermission(int permissionId)

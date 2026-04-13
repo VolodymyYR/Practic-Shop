@@ -7,8 +7,8 @@ public class Product
     public int DiscountPercentage {get; private set;} = 0;
     public int Amount {get; private set;} = 0;
 
-    private readonly List<Category> _categories = new ();
-    public IReadOnlyCollection<Category> Categories => _categories;
+    private readonly List<ProductCategory> _categories = new ();
+    public IReadOnlyCollection<ProductCategory> Categories => _categories;
 
     private readonly List<Review> _reviews = new ();
     public IReadOnlyCollection<Review> Reviews => _reviews;
@@ -24,7 +24,7 @@ public class Product
         SetAmount(amount);
     }
 
-    private Product() {} // для EF
+    private Product() {}
 
     public void SetName(string name)
     {
@@ -78,22 +78,24 @@ public class Product
         Amount = amount;
     }
 
-    public void AddCategory(ProductCategory category)
+    public void AddCategory(int categoryId)
     {
-        if (_categories.Contains(category))
+        if (_categories.Any(c => c.CategoryId == categoryId))
         {
             throw new Exception("Категорії не можуть дублюватись");
         }
-        _categories.Add(category);
+        _categories.Add(new ProductCategory(categoryId));
     }
 
-    public void RemoveCategory(ProductCategory category)
+    public void RemoveCategory(int categoryId)
     {
-        if (!_categories.Contains(category))
+        var productCategory = _categories.FirstOrDefault(c => c.CategoryId == categoryId);
+
+        if (productCategory is null)
         {
             throw new Exception("Категорія для видалення відсутня!");
         }
         
-        _categories.Remove(category);
+        _categories.Remove(productCategory);
     }
 }

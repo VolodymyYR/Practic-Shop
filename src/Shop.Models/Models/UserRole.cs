@@ -8,9 +8,8 @@ public class UserRole
 
     private UserRole(){}
 
-    public UserRole(int userId, int roleId)
+    public UserRole(int roleId)
     {
-        UserId = userId;
         RoleId = roleId;
     }
 }

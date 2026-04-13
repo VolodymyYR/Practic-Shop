@@ -6,7 +6,7 @@ public class User
     public string Email {get; private set;} = string.Empty;
 
     private List<UserRole> _userRoles = new ();
-    public IReadOnlyCollection<UserRole> userRoles => _userRoles;
+    public IReadOnlyCollection<UserRole> UserRoles => _userRoles;
 
     private User(){}
 
@@ -59,7 +59,7 @@ public class User
             throw new Exception("Cannot duplicate roles");
         }
 
-        _userRoles.Add(new UserRole(this.Id, roleId));
+        _userRoles.Add(new UserRole(roleId));
     }
 
     public void RemoveRole(int roleId)

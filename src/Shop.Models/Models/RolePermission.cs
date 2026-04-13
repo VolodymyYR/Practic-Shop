@@ -8,9 +8,8 @@ public class RolePermission
 
     private RolePermission(){}
 
-    public RolePermission(int roleId, int permissionId)
+    public RolePermission(int permissionId)
     {
-        RoleId = roleId;
         PermissionId = permissionId;
     }
 }

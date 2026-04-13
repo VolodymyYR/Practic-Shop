@@ -56,12 +56,14 @@ function filterSpecialOffer(filteredItems) {
 // ======================================================
 // ======================================================
 
-restartBtn.addEventListener("click", () => {
-    let activeInputs = document.querySelectorAll(".group-filter__item input:checked");
-    activeInputs.forEach(btn => btn.checked = false);
+if (restartBtn) {
+    restartBtn.addEventListener("click", () => {
+        let activeInputs = document.querySelectorAll(".group-filter__item input:checked");
+        activeInputs.forEach(btn => btn.checked = false);
 
-    priceInput[0].value = 0;
-    priceInput[1].value = maxPriceValues(initialProducts);
-    renderProducts(initialProducts);
-    setupSlider(maxPriceValues(initialProducts));
-})
+        priceInput[0].value = 0;
+        priceInput[1].value = maxPriceValues(initialProducts);
+        renderProducts(initialProducts);
+        setupSlider(maxPriceValues(initialProducts));
+    })
+}

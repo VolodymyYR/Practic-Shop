@@ -1,10 +1,13 @@
 @import url('./filterProducts.css');
 @import url('./header.css');
-@import url('./structure/intro.css');
-@import url('./structure/shop.css');
+
 @import url('./cardProduct.css');
 @import url('./variables.css');
 @import url('./components.css');
+
+@import url('./structure/basket.css');
+@import url('./structure/intro.css');
+@import url('./structure/shop.css');
 
 /* ================================================================= */
 /* ================================================================= */

@@ -28,6 +28,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     width: 100%;
     aspect-ratio: 1/1;
 
@@ -39,6 +40,35 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.item-content-shop__actions {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    top: 10px;
+    right: 10px;
+}
+
+.item-content-shop__add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    border-radius: 10%;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    transition: all .3s;
+    width: 40px;
+    aspect-ratio: 1/1;
+}
+
+.item-content-shop__add:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
 }
 
 .item-content-shop__info {

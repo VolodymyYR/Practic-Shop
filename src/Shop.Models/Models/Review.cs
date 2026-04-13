@@ -1,7 +1,9 @@
 public class Review {
     public int Id {get; private set;}
-    public int ProductId {get; private set;} // Додати зовнішній ключ
-    public int UserId {get; private set;} // Додати зовнішній ключ
+    public int ProductId {get; private set;}
+    public Product Product {get; private set;} = null!;
+    public int UserId {get; private set;}
+    public User User {get; private set;} = null!;
     public double Rating {get; private set;} // 1 - 5
     public string Comment {get; private set;} = string.Empty;
 

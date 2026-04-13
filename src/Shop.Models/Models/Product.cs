@@ -1,4 +1,4 @@
-public class Product
+public class Product 
 {
     public int Id {get; private set;}
     public string Name {get; private set;} = string.Empty;
@@ -7,11 +7,11 @@ public class Product
     public int DiscountPercentage {get; private set;} = 0;
     public int Amount {get; private set;} = 0;
 
-    private readonly List<ProductCategory> _categories = [];
-    public IReadOnlyCollection<ProductCategory> Categories => _categories.AsReadOnly();
+    private readonly List<Category> _categories = new ();
+    public IReadOnlyCollection<Category> Categories => _categories;
 
-    private readonly List<Review> _reviews = [];
-    public IReadOnlyCollection<Review> Reviews => _reviews.AsReadOnly();
+    private readonly List<Review> _reviews = new ();
+    public IReadOnlyCollection<Review> Reviews => _reviews;
 
     public double AverageRating => Reviews.Count == 0 ? 0 : Reviews.Average(r => r.Rating);
 
@@ -23,6 +23,8 @@ public class Product
         SetDiscountPercentage(discountPercentage);
         SetAmount(amount);
     }
+
+    private Product() {} // для EF
 
     public void SetName(string name)
     {

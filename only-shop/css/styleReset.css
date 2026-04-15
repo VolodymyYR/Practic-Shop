@@ -67,7 +67,8 @@ li{
     overflow: hidden;
 }
 
-.main{
+.main,
+.basket {
     flex: 1 1 auto;
 }
 

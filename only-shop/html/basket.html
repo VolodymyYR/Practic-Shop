@@ -13,12 +13,24 @@
 
         <!-- =================== MAIN ============================ -->
         
-        <main class="basket">
-            <div class="basket_intro">
-                <button class="product-card__console">View Basket</button>
+        <main class="basket" id="basket-page">
+            <div class="basket__container">
+                <div class="basket__view view-basket">
+                    <div class="view-basket__header">
+                        <h2 class="view-basket__title">Basket</h2>
+                    </div>
+                    <div class="view-basket__content content-basket content-shop__items">
+                        
+                    </div>
+                    <div class="view-basket__footer">
+                        <button class="view-basket__checkout product-card__console">Checkout</button>
+                        <button class="view-basket__checkout clear-basket">Clear Basket</button>
+                    </div>
+                </div>
             </div>
         </main>
 
+        
         <footer class="footer" id="main-footer"></footer>
     </div>
 </body>

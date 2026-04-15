@@ -44,7 +44,7 @@ export function renderProducts(products) {
     const productCards = products.map(product => `
         <div class="content-shop__item item-content-shop" data-id="${product.id}">
             <div class="item-content-shop__photo">
-                <img src="img/${product.image}" alt="${product.name}" loading="lazy">
+                <img src="${product.image}" alt="${product.name}" loading="lazy">
                 <div class="item-content-shop__actions">
                     <button class="item-content-shop__add add-btn">🧺</button>
                     <button class="item-content-shop__add add-favorite">❤️</button>    
@@ -55,7 +55,7 @@ export function renderProducts(products) {
                 ${priceBlock(product)}
                 ${starsBlock(product)}
             </div>
-            <button class="item-content-shop__by btn-by">Купити</button>
+            <button class="item-content-shop__by add-btn">Купити</button>
             ${discountBadge(product)}
         </div>
     `).join("");
@@ -63,3 +63,4 @@ export function renderProducts(products) {
     productList.innerHTML = productCards;
     runRow();
 };
+

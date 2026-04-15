@@ -4,6 +4,7 @@ import { setupSlider } from "./slider.js";
 import { setInitialProducts, applyFilter } from "./filter.js";
 import { addToBasket } from "./basket.js";
 import { getCardFromLocalStorage } from "./basket.js";
+import { getBasketFromLocalStorage } from "./basket.js";
 
 export let allProducts = [];
 const filterBtn = document.querySelector(".filter-btn");
@@ -30,7 +31,6 @@ async function initApp() {
     }
 }
 
-// ==================================== EVENT LISTENER =====================================
 
 document.addEventListener("click", (e) => {
     if (e.target === filterBtn) {
@@ -40,27 +40,19 @@ document.addEventListener("click", (e) => {
 
     if (e.target.classList.contains("add-btn")) {
         const productCard = e.target.closest(".item-content-shop");
-        const productId = productCard.dataset.id;
+        const productId = Number(productCard.dataset.id);
         const product = allProducts.find(p => p.id === productId);
         if (product) {
-            addToBasket(product);
+            const idCard = product.id;
+            addToBasket(idCard);
         }
     }
 
-    if (e.target.classList.contains("product-card__console")) {
-        console.log(getCardFromLocalStorage('basket'));
+    if (e.target.classList.contains("clear-basket")) {
+        localStorage.clear();
+        const parentsBlock = document.querySelector(".content-shop__items");
+        parentsBlock.replaceChildren();
     }
-
-    if (e.target.classList.contains("btn-by")) {
-        console.log("Buy button clicked");
-        const productCard = e.target.closest(".item-content-shop");
-        const productId = parseInt(productCard.dataset.id);
-        const product = allProducts.find(p => p.id === productId);
-        if (product) {
-            addToBasket(product);
-        }
-    }
-
 });
 
 // ===================================== COMPONENTS LOADER =====================================
@@ -82,9 +74,11 @@ loadComponent("main-footer", "/only-shop/html/footer.html");
 
 // ==================================== COMPONENTS LOADER =====================================
 
-document.addEventListener("DOMContentLoaded", () => {
-    initApp();
+document.addEventListener("DOMContentLoaded", async () => {
+    await initApp();
     if (document.getElementById("basket-page")) {
-        console.log("Basket page loaded");
+        const basketProducts = getBasketFromLocalStorage();
+        console.log("Basket products:", basketProducts);
+        renderProducts(basketProducts);
     }
 }); 

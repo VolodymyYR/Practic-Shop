@@ -1,66 +1,84 @@
 import { runRow } from "./effects.js";
+import { mainCardProduct } from "./componentsHTML.js";
 
-export function renderProducts(products) {
-    const productList = document.querySelector(".content-shop__items");
+// ================================ GLOBAL FUNCTIONS ================================
+const nameCategory = (itemProduct) => {
+    switch (true){
+        case itemProduct.category.includes('chairs'): return `Крісло: «${itemProduct.name}»`;
+        case itemProduct.category.includes('slippers'): return `Тапки-Кігірумі: «${itemProduct.name}»`;
+        case itemProduct.category.includes('toys'): return `Іграшка: «${itemProduct.name}»`;
+        default: return itemProduct.name;
+    }
+}
 
-    if (!productList) {
-        console.error("Product list container not found");
+const priceProductOld = (itemProduct) =>  `
+    <div class="item-content-shop__price-box">
+        <div class="item-content-shop__price old"><span>${itemProduct.priceOld}</span>₴</div>
+        <div class="item-content-shop__price new"><span>${itemProduct.price}</span>₴</div>
+    </div>`;
+
+const priceProductActual = (itemProduct) => `
+    <div class="item-content-shop__price-box">
+        <div class="item-content-shop__price"><span>${itemProduct.price}</span>₴</div>
+    </div>`;
+        
+// ======================================================
+// ==================== RENDER FUNCTIONS ================
+// ======================================================
+
+// Render main cards on the shop page
+
+export function renderMainCards(products) {
+    const mainList = document.querySelector(".content-shop__items");
+    
+    if (!mainList) {
+        console.error("Main list container not found");
         return;
     }
 
-    const nameCategory = (itemProduct) => {
-        switch (true){
-            case itemProduct.category.includes('chairs'): return `Крісло: «${itemProduct.name}»`;
-            case itemProduct.category.includes('slippers'): return `Тапки-Кігірумі: «${itemProduct.name}»`;
-            case itemProduct.category.includes('toys'): return `Іграшка: «${itemProduct.name}»`;
-            default: return itemProduct.name;
-        }
-    }
+    mainList.innerHTML = "";
 
-    const priceProductOld = (itemProduct) =>  `
-        <div class="item-content-shop__price-box">
-            <div class="item-content-shop__price old"><span>${itemProduct.priceOld}</span>₴</div>
-            <div class="item-content-shop__price new"><span>${itemProduct.price}</span>₴</div>
-        </div>`;
-    
-    const priceProductActual = (itemProduct) => `
-        <div class="item-content-shop__price-box">
-            <div class="item-content-shop__price"><span>${itemProduct.price}</span>₴</div>
-        </div>`;
+    const templateMainCard = document.createElement("template");
+    templateMainCard.innerHTML = mainCardProduct;
+    const templateMainCardContent = templateMainCard.content;
+
+    const fragment = document.createDocumentFragment();
+
+    products.forEach(product => {
+        const cardClone = templateMainCardContent.cloneNode(true);
+        const cardElement = cardClone.querySelector(".item-content-shop");
+
+        if (cardElement) {
+            cardElement.dataset.id = product.id;
+
+            const imgElement = cardElement.querySelector("img");
+            if (imgElement) {
+                imgElement.src = product.image;
+                imgElement.alt = product.name;
+            }
+
+            const titleElement = cardElement.querySelector(".item-content-shop__title");
+            if (titleElement) {
+                titleElement.textContent = nameCategory(product);
+            }
+
+            const priceBoxElement = cardElement.querySelector(".item-content-shop__price-box");
+            if (priceBoxElement) {
+                priceBoxElement.innerHTML = product.priceOld ? priceProductOld(product) : priceProductActual(product);
+            }
+            const ratingStarsElement = cardElement.querySelector(".rating-stars");
+            if (ratingStarsElement && product.rating !== undefined) {
+                ratingStarsElement.style.setProperty('--rating-percent', product.rating ? `${(product.rating / 5) * 100}%` : '0%');
+            }
             
-    const priceBlock = (itemProduct) => itemProduct.priceOld ? priceProductOld(itemProduct) : priceProductActual(itemProduct);
+            const discountBadgeElement = cardElement.querySelector(".item-content-shop__discount");
+            if (discountBadgeElement && product.specialOffer !== undefined) {
+                discountBadgeElement.style.display = product.specialOffer ? 'block' : 'none';
+            }
+        }
+        fragment.appendChild(cardClone);
+    });
 
-    const discountBadge = (itemProduct) => itemProduct.specialOffer === true ? `<div class="item-content-shop__discount run-row" data-speed="4" data-gap="10" data-pause="true" data-split="😁">Акція</div>` : '';
-
-    let star;
-    const starsBlock = (itemProduct) => {
-        if (!itemProduct.rating) return '';
-        return star = `
-            <div class="rating-stars" style="--rating-percent: ${itemProduct.rating ? (itemProduct.rating / 5) * 100 : 0}%;"></div>
-        `;   
-    }
-
-    productList.innerHTML = "";
-    const productCards = products.map(product => `
-        <div class="content-shop__item item-content-shop" data-id="${product.id}">
-            <div class="item-content-shop__photo">
-                <img src="${product.image}" alt="${product.name}" loading="lazy">
-                <div class="item-content-shop__actions">
-                    <button class="item-content-shop__add add-btn">🧺</button>
-                    <button class="item-content-shop__add add-favorite">❤️</button>    
-                </div>
-            </div>
-            <div class="item-content-shop__info">
-                <h2 class="item-content-shop__title">${nameCategory(product)}</h2>
-                ${priceBlock(product)}
-                ${starsBlock(product)}
-            </div>
-            <button class="item-content-shop__by add-btn">Купити</button>
-            ${discountBadge(product)}
-        </div>
-    `).join("");
-
-    productList.innerHTML = productCards;
+    mainList.appendChild(fragment);
     runRow();
 };
-

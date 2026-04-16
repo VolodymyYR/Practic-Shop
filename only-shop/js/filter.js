@@ -1,5 +1,5 @@
 import { priceInput } from "./slider.js";
-import { renderProducts } from "./render.js";
+import { renderMainCards } from "./render.js";
 import { setupSlider } from "./slider.js";
 import { maxPriceValues } from "./main.js";
 
@@ -63,7 +63,8 @@ if (restartBtn) {
 
         priceInput[0].value = 0;
         priceInput[1].value = maxPriceValues(initialProducts);
-        renderProducts(initialProducts);
+        // renderProducts(initialProducts);
+        renderMainCards(initialProducts);
         setupSlider(maxPriceValues(initialProducts));
     })
 }

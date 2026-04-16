@@ -1,5 +1,5 @@
 import { downloadData } from "./app.js";
-import { renderProducts } from "./render.js";
+import { renderMainCards } from "./render.js";
 import { setupSlider } from "./slider.js";
 import { setInitialProducts, applyFilter } from "./filter.js";
 import { addToBasket } from "./basket.js";
@@ -23,7 +23,7 @@ async function initApp() {
             if (document.getElementById("filter")) {
                 setupSlider(allProducts ? maxPriceValues(allProducts) : 0);
                 setInitialProducts(allProducts);
-                renderProducts(allProducts);
+                renderMainCards(allProducts);
             }
         }
     } catch (error) {
@@ -35,7 +35,7 @@ async function initApp() {
 document.addEventListener("click", (e) => {
     if (e.target === filterBtn) {
         const filtered = applyFilter(allProducts);
-        renderProducts(filtered);  
+        renderMainCards(filtered);
     }  
 
     if (e.target.classList.contains("add-btn")) {
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await initApp();
     if (document.getElementById("basket-page")) {
         const basketProducts = getBasketFromLocalStorage();
-        console.log("Basket products:", basketProducts);
-        renderProducts(basketProducts);
+        console.log("Basket Products:", basketProducts);
+        renderMainCards(basketProducts);
     }
 }); 

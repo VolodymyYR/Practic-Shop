@@ -1,7 +1,12 @@
+// Render functions for the Only Shop application
+
 import { runRow } from "./effects.js";
 import { mainCardProduct } from "./componentsHTML.js";
 
 // ================================ GLOBAL FUNCTIONS ================================
+// ==================================================================================
+
+// Ставимо назву категорії в залежності від її типу та назви товару ===========
 const nameCategory = (itemProduct) => {
     switch (true){
         case itemProduct.category.includes('chairs'): return `Крісло: «${itemProduct.name}»`;
@@ -11,22 +16,24 @@ const nameCategory = (itemProduct) => {
     }
 }
 
+// Формуємо блок з ціною товару, враховуючи чи є стара ціна (для акційних товарів)
 const priceProductOld = (itemProduct) =>  `
     <div class="item-content-shop__price-box">
         <div class="item-content-shop__price old"><span>${itemProduct.priceOld}</span>₴</div>
         <div class="item-content-shop__price new"><span>${itemProduct.price}</span>₴</div>
     </div>`;
 
+// Формуємо блок з ціною товару для звичайних товарів без акції
 const priceProductActual = (itemProduct) => `
     <div class="item-content-shop__price-box">
         <div class="item-content-shop__price"><span>${itemProduct.price}</span>₴</div>
     </div>`;
         
-// ======================================================
-// ==================== RENDER FUNCTIONS ================
-// ======================================================
+// ================================================================================
+// ==================== RENDER FUNCTIONS ==========================================
+// ================================================================================
 
-// Render main cards on the shop page
+// Render main cards on the shop page =============================
 
 export function renderMainCards(products) {
     const mainList = document.querySelector(".content-shop__items");

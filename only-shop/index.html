@@ -10,11 +10,14 @@
 </head>
 <body>
     <div class="wrapper">
+        <!-- ================== HEADER =========================== -->
         <header class="header" id="main-header"></header>
+
         <!-- =================== MAIN ============================ -->
         
         <main class="main">
 
+            <!-- ==================================== INTRO ===================== -->
             <div class="main__intro intro">
                 <div class="intro__container">
                     <div class="intro__content">
@@ -25,13 +28,18 @@
                 </div>
             </div>
 
+            <!-- ==================================== SHOP ===================== -->
             <div class="main__shop shop">
                 <div class="shop__container">
 
+                    <!-- ==================================== ASIDE ===================== -->
                     <aside class="shop__aside">
+
+                        <!-- ==================================== FILTER ===================== -->
                         <div class="shop__filter filter" id="filter">
                             <h2>Фільтер</h2>
 
+                            <!-- =================================== CATEGORY ====================== -->
                             <div class="filter__group group-filter group-filter--categorys">
                                 <h3 class="group-filter__title">Катагеорія:</h3>
                                 <label class="group-filter__item category" for="laptops"><input type="checkbox" value="laptops" name="categoryFilter" id="laptops">Laptops</label>
@@ -40,8 +48,11 @@
                                 <label class="group-filter__item category" for="chairs"><input type="checkbox" value="chairs" name="categoryFilter" id="chairs">Chairs</label>
                             </div>
 
+                            <!-- ==================================== PRICE ========================= -->
                             <div class="filter__group group-filter">
                                 <h3 class="group-filter__title">Ціна:</h3>
+
+                                <!----- Price Inputs ------------>
                                 <div class="price-input-container">
                                     <div class="field">
                                         <span>Мін.</span>
@@ -54,6 +65,7 @@
                                     </div>
                                 </div>
 
+                                <!----- Price Slider ------------>
                                 <div class="slider-container">
                                     <div class="price-slider">
                                         <div class="progress"></div>
@@ -65,18 +77,23 @@
                                 </div>
                             </div>
 
+                            <!-- ==================================== SPECIAL OFFERS ========================= -->
                             <div class="filter__group group-filter group-filter--categorys">
                                 <h3 class="group-filter__title">Спеціальні пропозиції:</h3>
                                 <label class="group-filter__item special-offer" for="test"><input type="checkbox" value="test" name="specialOffer" id="test">Акція</label>
                             </div>
 
+                            <!-- ==================================== BUTTONS ================================ -->
                             <button class="filter-btn">Застосувати</button>
                             <button class="filter__button restart-filter" id="resetFilter">Скинути</button>
 
                         </div>
                     </aside>
 
+                    <!-- ==================================== CONTENT ===================== -->
                     <div class="shop__content content-shop">
+
+                        <!-- ==================================== PRODUCTS ===================== -->
                         <div class="content-shop__items">
 
                         </div>

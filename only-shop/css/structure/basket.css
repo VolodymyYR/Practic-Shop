@@ -1,3 +1,5 @@
+/* BASKET INTRO --- test ---- */
+
 .basket_intro{
     display: flex;
     flex-direction: column;
@@ -26,7 +28,9 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.product-card__console:
+.product-card__console:active{
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
 
 /* =========== */
 

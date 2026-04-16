@@ -1,3 +1,12 @@
+// Effects functions for the Only Shop application
+
+// Run-row effect for elements with the class "run-row" ============================================================
+// data attributes:
+// data-speed - speed of the animation (default: 5s)
+// data-gap - gap between repeated content in pixels (default: 10px)
+// data-pause - whether to pause animation on hover (default: false)
+// data-split - optional content to alternate with the main content (default: none)
+
 export function runRow () {
     const elements = document.querySelectorAll('.run-row');
     elements.forEach(el => {

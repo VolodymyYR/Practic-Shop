@@ -1,3 +1,5 @@
+/* CARD PRODUCT */
+
 .item-content-shop {
     display: flex;
     flex-direction: column;
@@ -24,6 +26,10 @@
     box-shadow: 0px 0px 17px 1px rgba(0, 0, 0, 0.15);
 }
 
+/* -------------------------- */
+/* --------- PHOTO ---------- */
+/* -------------------------- */
+
 .item-content-shop__photo {
     display: flex;
     align-items: center;
@@ -41,6 +47,10 @@
     height: 100%;
     object-fit: cover;
 }
+
+/* -------------------------- */
+/* ---------- ACTIONS ------- */
+/* -------------------------- */
 
 .item-content-shop__actions {
     position: absolute;
@@ -70,6 +80,10 @@
     background: rgba(255, 255, 255, 1);
     transform: scale(1.1);
 }
+
+/* -------------------------- */
+/* ---------- INFO ---------- */
+/* -------------------------- */
 
 .item-content-shop__info {
     display: flex;
@@ -112,6 +126,10 @@
     font-weight: 800;
 }
 
+/* -------------------------- */
+/* ---------- BY ------------ */
+/* -------------------------- */
+
 .item-content-shop__by {
     background: #ff3d3d;
     color: #fff;
@@ -127,6 +145,10 @@
 .item-content-shop__by:active{
     background: #ed6a29;
 }
+
+/* -------------------------- */
+/* ----- DISCOUNT ----------- */
+/* -------------------------- */
 
 .item-content-shop__discount {
     position: absolute;

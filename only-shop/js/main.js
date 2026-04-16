@@ -1,9 +1,11 @@
+// Main JavaScript file for the Only Shop application
+
+// Import necessary modules and functions
 import { downloadData } from "./app.js";
 import { renderMainCards } from "./render.js";
 import { setupSlider } from "./slider.js";
 import { setInitialProducts, applyFilter } from "./filter.js";
 import { addToBasket } from "./basket.js";
-import { getCardFromLocalStorage } from "./basket.js";
 import { getBasketFromLocalStorage } from "./basket.js";
 
 export let allProducts = [];
@@ -14,6 +16,9 @@ export const maxPriceValues = (products) =>{
     return Math.ceil(Math.max(...products.map(p => p.price)) / 10) * 10;
 }
 
+// ========================================================================================================================
+// ==================================== ЗАПУСК ============================================================================
+// ========================================================================================================================
 
 async function initApp() {
     try {
@@ -31,6 +36,42 @@ async function initApp() {
     }
 }
 
+// ========================================================================================================================
+// ================================== COMPONENTS LOADER (Повторюючі HTML-елементи) ========================================
+// ========================================================================================================================
+
+
+function loadComponent(id, path) {
+    fetch(path)
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById(id).innerHTML = data;
+        })
+        .catch(error => console.error(`Error loading component ${id}:`, error));
+}
+
+loadComponent("main-header", "/only-shop/html/header.html");
+loadComponent("main-footer", "/only-shop/html/footer.html");
+
+// ========================================================================================================================
+// ==================================== EVENT LISTENERS ===================================================================
+// ========================================================================================================================
+
+// ДОКУМЕНТ ЗАГРУЗИТЬСЯ ================================================================
+
+document.addEventListener("DOMContentLoaded", async () => {
+    await initApp();
+    if (document.getElementById("basket-page")) {
+        const basketProducts = getBasketFromLocalStorage();
+        console.log("Basket Products:", basketProducts);
+        renderMainCards(basketProducts);
+    }
+}); 
+
+// НАТИСКАННЯ ================================================================
 
 document.addEventListener("click", (e) => {
     if (e.target === filterBtn) {
@@ -54,31 +95,3 @@ document.addEventListener("click", (e) => {
         parentsBlock.replaceChildren();
     }
 });
-
-// ===================================== COMPONENTS LOADER =====================================
-
-function loadComponent(id, path) {
-    fetch(path)
-        .then(response => {
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            return response.text();
-        })
-        .then(data => {
-            document.getElementById(id).innerHTML = data;
-        })
-        .catch(error => console.error(`Error loading component ${id}:`, error));
-}
-
-loadComponent("main-header", "/only-shop/html/header.html");
-loadComponent("main-footer", "/only-shop/html/footer.html");
-
-// ==================================== COMPONENTS LOADER =====================================
-
-document.addEventListener("DOMContentLoaded", async () => {
-    await initApp();
-    if (document.getElementById("basket-page")) {
-        const basketProducts = getBasketFromLocalStorage();
-        console.log("Basket Products:", basketProducts);
-        renderMainCards(basketProducts);
-    }
-}); 

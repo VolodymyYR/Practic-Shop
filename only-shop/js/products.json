@@ -1,6 +1,6 @@
 [
     {
-        "image": "/only-shop/img/kigurumi-slippers/авокадо/slippers.png",
+        "image": "/only-shop/img/kigurumi-slippers/авокадо/slippers.webp",
         "id": 1,
         "name": "Авокадо",
         "price": 799,
@@ -10,7 +10,7 @@
         "specialOffer": true
     },
     {
-        "image": "/only-shop/img/kigurumi-slippers/акула-блакитна/shark.png",
+        "image": "/only-shop/img/kigurumi-slippers/акула-блакитна/shark.webp",
         "id": 2,
         "name": "Блакитна Акула",
         "price": 590,
@@ -20,7 +20,7 @@
         "specialOffer": true
     },
     {
-        "image": "/only-shop/img/soft-chairs/динозавр/dino.png",
+        "image": "/only-shop/img/soft-chairs/динозавр/dino.webp",
         "id": 3,
         "name": "Динозавр",
         "price": 1499,
@@ -30,14 +30,14 @@
         "specialOffer": true
     },
     {
-        "image": "/only-shop/img/soft-chairs/стіч/stich.png",
+        "image": "/only-shop/img/soft-chairs/стіч/stich.webp",
         "id": 4,
         "name": "Стіч",
         "price": 1499,
         "category": "chairs"
     },
     {
-        "image": "/only-shop/img/soft-chairs/панда/panda.png",
+        "image": "/only-shop/img/soft-chairs/панда/panda.webp",
         "id": 5,
         "name": "Панда",
         "price": 1250,
@@ -46,21 +46,21 @@
         "specialOffer": true
     },
     {
-        "image": "/only-shop/img/soft-chairs/лев/lione.png",
+        "image": "/only-shop/img/soft-chairs/лев/lione.webp",
         "id": 6,
         "name": "Лев",
         "price": 1550,
         "category": ["chairs"]
     },
     {
-        "image": "/only-shop/img/soft-toys/мякі-іграшки/пікачу/pickachy.png",
+        "image": "/only-shop/img/soft-toys/мякі-іграшки/пікачу/pickachy.webp",
         "id": 7,
         "name": "Пікачу",
         "price": 799,
         "category": "toys"
     },
     {
-        "image": "/only-shop/img/soft-toys/мякі-іграшки/авокадо/avocado.png",
+        "image": "/only-shop/img/soft-toys/мякі-іграшки/авокадо/avocado.webp",
         "id": 8,
         "name": "Авокадо",
         "price": 1499,

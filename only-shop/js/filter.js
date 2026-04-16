@@ -1,8 +1,15 @@
+// Filter functions for the Only Shop application
+
 import { priceInput } from "./slider.js";
 import { renderMainCards } from "./render.js";
 import { setupSlider } from "./slider.js";
 import { maxPriceValues } from "./main.js";
 
+// ======================================================================================
+// ============================== FILTER FUNCTIONS ======================================
+// ======================================================================================
+
+// Global variable to store the initial products list for filtering
 let initialProducts = [];
 export const setInitialProducts = (products) => {
     initialProducts = products;
@@ -10,6 +17,7 @@ export const setInitialProducts = (products) => {
 
 const restartBtn = document.querySelector(".restart-filter");
 
+// Apply all filters to the products and return the filtered list
 export const applyFilter = () => {
     const minPrice = parseInt(priceInput[0].value);
     const maxPrice = parseInt(priceInput[1].value);
@@ -23,6 +31,7 @@ export const applyFilter = () => {
     return result;
 }
 
+// Filter products by price range
 function filterPrice (filteredItems, priceMin, priceMax){
     return filteredItems.filter(p => p.price >= priceMin && p.price <= priceMax);
 }
@@ -31,6 +40,7 @@ function filterPrice (filteredItems, priceMin, priceMax){
 // ======================================================
 // ======================================================
 
+// Filter products by selected categories
 function filterCategory(filteredItems) {
     let categoryButtons = document.querySelectorAll(".group-filter__item.category input:checked");
     if (categoryButtons.length === 0) {
@@ -52,9 +62,9 @@ function filterSpecialOffer(filteredItems) {
     return filteredItems.filter(p => p.specialOffer === true);
 }
 
-// ======================================================
-// ======================================================
-// ======================================================
+// ===================================================================================
+// ==================== RESTART FILTER ===============================================
+// ===================================================================================
 
 if (restartBtn) {
     restartBtn.addEventListener("click", () => {

@@ -1,3 +1,5 @@
+// App JavaScript file for the Only Shop application
+
 export async function downloadData(url) { 
     try {
         const response = await fetch(url);

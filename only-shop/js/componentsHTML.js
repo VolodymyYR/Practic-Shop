@@ -1,3 +1,6 @@
+// HTML templates for the Only Shop application
+
+// Main card product =================================================================================
 export const mainCardProduct = `
     <div class="content-shop__item item-content-shop">
         <div class="item-content-shop__photo">

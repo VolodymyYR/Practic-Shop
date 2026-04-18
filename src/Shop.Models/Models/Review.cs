@@ -7,6 +7,8 @@ public class Review {
     public double Rating {get; private set;} // 1 - 5
     public string Comment {get; private set;} = string.Empty;
 
+    private Review(){}
+
     public Review(int productId, int userId, int rating, string comment)
     {
         SetProduct(productId);

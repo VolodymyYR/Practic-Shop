@@ -36,7 +36,7 @@ const priceProductActual = (itemProduct) => `
 // Render main cards on the shop page =============================
 
 export function renderMainCards(products) {
-    const mainList = document.querySelector(".content-shop__items");
+    const mainList = document.querySelector(".card-items");
     
     if (!mainList) {
         console.error("Main list container not found");

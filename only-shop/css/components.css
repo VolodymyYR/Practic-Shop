@@ -34,3 +34,51 @@
     /* Фон (заповнення). Ми будемо змінювати його ширину через JS */
     background: linear-gradient(90deg, #FFD700 var(--rating-percent, 0%), #CCCCCC var(--rating-percent, 0%));
 }
+
+/* ============================================= */
+
+.quantity {
+    display: flex;
+    flex-direction: column;
+    width: 40px;
+    aspect-ratio: 1/4;
+    border: #eee solid 1px;
+    justify-content: space-between;
+
+}
+.quantity__btn {
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: #eee;
+}
+.quantity-btn-plus {
+}
+.quantity-btn-minus {
+}
+.quantity__block-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Для Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.quantity__input {
+    width: 100%;
+    text-align: center;
+    border: none;
+    outline: none;
+}

@@ -13,18 +13,6 @@
 /* ======================== INTRO PAGE ============================= */
 /* ================================================================= */
 
-.content-shop {
-    flex: 1 1 auto;
-}
-.content-shop__items {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 400px));
-    justify-content: space-around;
-    column-gap: 30px;
-    row-gap: 40px;
-    width: 100%;
-}
-
 /* =================================== */
 /* =================================== */
 /* =================================== */

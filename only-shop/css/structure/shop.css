@@ -19,7 +19,9 @@
 .content-shop {
     flex: 1 1 auto;
 }
-.content-shop__items {
+.shop__content{}
+
+.content-shop__items{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 400px));
     justify-content: space-around;

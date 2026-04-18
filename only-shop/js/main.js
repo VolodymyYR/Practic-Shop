@@ -7,6 +7,8 @@ import { setupSlider } from "./slider.js";
 import { setInitialProducts, applyFilter } from "./filter.js";
 import { addToBasket } from "./basket.js";
 import { getBasketFromLocalStorage } from "./basket.js";
+import { actionCounter } from "./components.js";
+import { changeInput } from "./components.js";
 
 export let allProducts = [];
 const filterBtn = document.querySelector(".filter-btn");
@@ -67,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (document.getElementById("basket-page")) {
         const basketProducts = getBasketFromLocalStorage();
         console.log("Basket Products:", basketProducts);
-        renderMainCards(basketProducts);
+        // renderMainCards(basketProducts);
     }
 }); 
 
@@ -91,7 +93,17 @@ document.addEventListener("click", (e) => {
 
     if (e.target.classList.contains("clear-basket")) {
         localStorage.clear();
-        const parentsBlock = document.querySelector(".content-shop__items");
+        const parentsBlock = document.querySelector(".card-items");
         parentsBlock.replaceChildren();
     }
+
+    if (e.target.closest("[data-counter-btn]")) {
+        actionCounter(e.target)
+    }
 });
+
+document.addEventListener('change', (e) => {
+    if (e.target.hasAttribute('data-counter-input')){
+        changeInput(e.target)
+    }
+})

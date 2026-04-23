@@ -95,35 +95,12 @@
     text-transform: capitalize;
 }
 
-.item-content-shop__price-box{
+.item-content-shop__price{
     display: flex;
     flex-direction: column;
+    align-items: start;
     row-gap: 10px;
 
-}
-.item-content-shop__price {
-    display: flex;
-    align-items: end;
-    column-gap: 6px;
-
-    font-weight: 800;
-    font-size: 20px;
-    line-height: 1;
-}
-
-.item-content-shop__price.old{
-    color: #bfbdbd;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: dashed;
-}
-
-.item-content-shop__price.new{
-    color: #d00000;
-}
-
-.item-content-shop__price span{
-    font-weight: 800;
 }
 
 /* -------------------------- */
@@ -145,10 +122,6 @@
 .item-content-shop__by:active{
     background: #ed6a29;
 }
-
-/* -------------------------- */
-/* ----- DISCOUNT ----------- */
-/* -------------------------- */
 
 .item-content-shop__discount {
     position: absolute;

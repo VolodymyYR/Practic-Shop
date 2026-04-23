@@ -2,6 +2,8 @@
 
 import { runRow } from "./effects.js";
 import { mainCardProduct } from "./componentsHTML.js";
+import { basketCardProduct } from "./componentsHTML.js";
+import { getBasketFromLocalStorage } from "./basket.js";
 
 // ================================ GLOBAL FUNCTIONS ================================
 // ==================================================================================
@@ -9,26 +11,45 @@ import { mainCardProduct } from "./componentsHTML.js";
 // Ставимо назву категорії в залежності від її типу та назви товару ===========
 const nameCategory = (itemProduct) => {
     switch (true){
-        case itemProduct.category.includes('chairs'): return `Крісло: «${itemProduct.name}»`;
-        case itemProduct.category.includes('slippers'): return `Тапки-Кігірумі: «${itemProduct.name}»`;
-        case itemProduct.category.includes('toys'): return `Іграшка: «${itemProduct.name}»`;
+        case itemProduct.category?.includes('chairs'): return `Крісло: «${itemProduct.name}»`;
+        case itemProduct.category?.includes('slippers'): return `Тапки-Кігірумі: «${itemProduct.name}»`;
+        case itemProduct.category?.includes('toys'): return `Іграшка: «${itemProduct.name}»`;
         default: return itemProduct.name;
     }
 }
 
 // Формуємо блок з ціною товару, враховуючи чи є стара ціна (для акційних товарів)
 const priceProductOld = (itemProduct) =>  `
-    <div class="item-content-shop__price-box">
-        <div class="item-content-shop__price old"><span>${itemProduct.priceOld}</span>₴</div>
-        <div class="item-content-shop__price new"><span>${itemProduct.price}</span>₴</div>
+    <div class="price__old">${itemProduct.price}</div>
+    <div class="price__now">
+        <span>${Number(itemProduct.price) * (1 - parseFloat(itemProduct.discount))}</span>
+        <div class="price__discount">${parseFloat(itemProduct.discount) * 100}%</div>
     </div>`;
 
 // Формуємо блок з ціною товару для звичайних товарів без акції
 const priceProductActual = (itemProduct) => `
-    <div class="item-content-shop__price-box">
-        <div class="item-content-shop__price"><span>${itemProduct.price}</span>₴</div>
-    </div>`;
+        <div class="price__now"><span>${itemProduct.price}</span>₴</div>
+    `;
         
+const optionsProductContainer = (itemProduct) => {
+    return itemProduct.options.map(option =>`
+    <div class="item-content-basket__options options options-${option.type}">
+        <span>${option.type}:</span>
+        <div class="options__items">
+        ${optionsProduct(option)}
+        </div>
+    </div>
+`).join('');
+};
+
+const optionsProduct = (options) => {
+    return options.values.map(value =>`
+    <label class="options__item radio-button">
+        <input class="radio-button__input" value="${value}" type="radio" name="${options.type}" id="">
+        <span class="radio-button__decor" style="--${options.type}-product: ${value};"></span>
+    </label>
+`).join('');
+};
 // ================================================================================
 // ==================== RENDER FUNCTIONS ==========================================
 // ================================================================================
@@ -69,13 +90,16 @@ export function renderMainCards(products) {
                 titleElement.textContent = nameCategory(product);
             }
 
-            const priceBoxElement = cardElement.querySelector(".item-content-shop__price-box");
+            const priceBoxElement = cardElement.querySelector(".price");
             if (priceBoxElement) {
-                priceBoxElement.innerHTML = product.priceOld ? priceProductOld(product) : priceProductActual(product);
+                priceBoxElement.innerHTML = product.discount ? priceProductOld(product) : priceProductActual(product);
             }
+
             const ratingStarsElement = cardElement.querySelector(".rating-stars");
             if (ratingStarsElement && product.rating !== undefined) {
                 ratingStarsElement.style.setProperty('--rating-percent', product.rating ? `${(product.rating / 5) * 100}%` : '0%');
+            } else {
+                ratingStarsElement.remove();
             }
             
             const discountBadgeElement = cardElement.querySelector(".item-content-shop__discount");
@@ -89,3 +113,97 @@ export function renderMainCards(products) {
     mainList.appendChild(fragment);
     runRow();
 };
+
+// ================================================================================
+
+export function renderBasketCard(products){
+    const basket = document.querySelector('.content-basket');
+
+    if(!basket){
+        console.log("Basket noun")
+        return
+    }
+
+    basket.innerHTML = "";
+
+    const templateBasketCard = document.createElement("template");
+    templateBasketCard.innerHTML = basketCardProduct;
+    const templateBasketCardContent = templateBasketCard.content;
+
+    const fragment = document.createDocumentFragment()
+
+    products.forEach(product =>{
+        const cardClone = templateBasketCardContent.cloneNode(true);
+        const cardElement = cardClone.querySelector('.item-content-basket');
+
+        if(cardElement){
+            const mainImg = cardElement.querySelector('.item-content-basket__photo');
+            if (mainImg && product.image){ 
+                mainImg.src = product.image;
+                mainImg.alt = product.name;
+            }
+
+            const titleProduct = cardElement.querySelector('.item-content-basket__title');
+            if(titleProduct && product.name){
+                titleProduct.textContent = nameCategory(product);
+            } else {
+                titleProduct?.remove();
+            }
+
+            const ratingStars = cardElement.querySelector('.rating-stars');
+            if (ratingStars && product.rating != undefined){
+                ratingStars.style.setProperty('--rating-percent', product.rating ? `${(product.rating / 5) * 100}%` : '0%');
+            } else {
+                ratingStars?.remove();
+            }
+
+            const reviewsStatistic = cardElement.querySelector('.item-content-basket__reviews-statistic');
+            if(reviewsStatistic && product.rating){
+                reviewsStatistic.textContent = `(${(product.rating / 5) * 10}${product.reviewsQuantity ? ` - ${product.reviewsQuantity} Reviews`: ""})`; 
+            } else {
+                reviewsStatistic?.remove();
+            }
+
+            const article = cardElement.querySelector('.item-content-basket__article');
+            if(article && product.article){
+                article.querySelector('span').textContent = product.article;
+            } else {
+                article?.remove();
+            }
+
+            const price = cardElement.querySelector(".price");
+            if(price && product.price){
+                price.innerHTML = product.discount ? priceProductOld(product) : priceProductActual(product);
+            } else {
+                price?.remove();
+            }
+
+            const contentOptions = cardElement.querySelector('.item-content-basket__details-product');
+            if(contentOptions && product.options){
+                contentOptions.innerHTML = optionsProductContainer(product);
+            }
+
+            const quantity = cardElement.querySelector('.quantity');
+            if(quantity){
+                const input = quantity.querySelector('input');
+                input.value = product.quantity
+            }
+
+            const wholeRow = cardElement.querySelector('.item-content-basket__cost');
+            if(wholeRow){
+                const whole = wholeRow.querySelector('b');
+                whole.textContent = parseFloat(product.price) * parseInt(product.quantity);
+            }
+
+            const availability = cardElement.querySelector(".item-content-basket__status");
+            if (availability){
+                const availabilityText = availability.querySelector('span');
+                availabilityText.textContent = product.availability;
+                availability.dataset.statusAvailability = product.availability
+            }
+        }   
+        fragment.appendChild(cardClone);
+    });
+
+    basket.appendChild(fragment);
+}

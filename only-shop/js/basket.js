@@ -33,10 +33,25 @@ export function getCardFromLocalStorage(key) {
 
 // Get the full product details for items in the basket ===============================================
 export function getBasketFromLocalStorage() {
-    const value = JSON.parse(localStorage.getItem('basket'));
-    if (!value || value.length === 0) return [];
-    const allBasket = allProducts.filter(product => {
-        return value.some(item => String(item.id) === String(product.id));
-    });
-    return allBasket;
+    const basketItems = getCardFromLocalStorage('basket');
+    if (!basketItems || basketItems.length === 0) return [];
+    // const allBasket = allProducts.filter(product => {
+    //     return basketItems.some(item => String(item.id) === String(product.id));
+    // });
+
+    const fullBasket = basketItems.map(basketItem =>{
+        const productData = allProducts.find(product => String(product.id) === String(basketItem.id));
+
+        if(productData){
+            return{
+                ...productData,
+                quantity: basketItem.quantity
+            };
+        }
+
+        return null;
+    })
+
+
+    return fullBasket.filter(item => item != null);
 }

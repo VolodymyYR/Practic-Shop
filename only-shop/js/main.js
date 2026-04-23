@@ -3,6 +3,7 @@
 // Import necessary modules and functions
 import { downloadData } from "./app.js";
 import { renderMainCards } from "./render.js";
+import { renderBasketCard } from "./render.js";
 import { setupSlider } from "./slider.js";
 import { setInitialProducts, applyFilter } from "./filter.js";
 import { addToBasket } from "./basket.js";
@@ -69,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (document.getElementById("basket-page")) {
         const basketProducts = getBasketFromLocalStorage();
         console.log("Basket Products:", basketProducts);
-        // renderMainCards(basketProducts);
+        renderBasketCard(basketProducts);
     }
 }); 
 

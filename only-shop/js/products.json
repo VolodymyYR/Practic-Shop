@@ -1,69 +1,174 @@
 [
     {
-        "image": "/only-shop/img/kigurumi-slippers/авокадо/slippers.webp",
+        "image": "https://placehold.co/400x400/e8f5e9/2e7d32?text=Avocado+Slippers",
         "id": 1,
+        "article": "NB-21LK3",
         "name": "Авокадо",
-        "price": 799,
-        "priceOld": 1000,
         "category": ["slippers"],
+        "discount": 0.1,
+        "price": 1200, 
         "rating": 4.5,
-        "specialOffer": true
+        "reviewsQuantity": 123,
+        "specialOffer": true,
+        "availability": "В наявності",
+        "options": [
+            {
+                "type": "color",
+                "values": ["#ff0000", "#00ff00", "#0000ff"]
+            },
+            {
+                "type": "size",
+                "values": ["S", "M", "L"]
+            }
+        ]
     },
     {
-        "image": "/only-shop/img/kigurumi-slippers/акула-блакитна/shark.webp",
+        "image": "https://placehold.co/400x400/e3f2fd/1565c0?text=Shark+Slippers",
         "id": 2,
+        "article": "SH-88BL",
         "name": "Блакитна Акула",
-        "price": 590,
-        "priceOld": 700,
+        "discount": 0.2,
+        "price": 700,
         "category": ["slippers"],
         "rating": 4.1,
-        "specialOffer": true
+        "reviewsQuantity": 16,
+        "specialOffer": true,
+        "availability": "Закінчується",
+        "options": [
+            {
+                "type": "size",
+                "values": ["M", "L"]
+            }
+        ]
     },
     {
-        "image": "/only-shop/img/soft-chairs/динозавр/dino.webp",
+        "image": "https://placehold.co/400x400/f1f8e9/558b2f?text=Dino+Chair",
         "id": 3,
         "name": "Динозавр",
-        "price": 1499,
-        "priceOld": 1900,
+        "discount": 0.2,
+        "price": 1900,
         "category": ["chairs"],
         "rating": 3.3,
-        "specialOffer": true
+        "reviewsQuantity": 2,
+        "specialOffer": true,
+        "availability": "В наявності"
     },
     {
-        "image": "/only-shop/img/soft-chairs/стіч/stich.webp",
+        "image": "https://placehold.co/400x400/ede7f6/4527a0?text=Stitch+Chair",
         "id": 4,
+        "article": "CH-ST01",
         "name": "Стіч",
         "price": 1499,
-        "category": "chairs"
+        "category": "chairs",
+        "rating": 5,
+        "reviewsQuantity": 40,
+        "availability": "В наявності",
+        "options": [] 
     },
     {
-        "image": "/only-shop/img/soft-chairs/панда/panda.webp",
+        "image": "https://placehold.co/400x400/fafafa/212121?text=Panda+Chair",
         "id": 5,
+        "article": "CH-PD02",
         "name": "Панда",
-        "price": 1250,
-        "priceOld": 1500,
+        "discount": 0.15,
+        "price": 1500,
         "category": ["chairs"],
-        "specialOffer": true
+        "rating": 4.8,
+        "reviewsQuantity": 210,
+        "specialOffer": true,
+        "availability": "В наявності",
+        "options": [
+            {
+                "type": "material",
+                "values": ["велюр", "плюш"]
+            }
+        ]
     },
     {
-        "image": "/only-shop/img/soft-chairs/лев/lione.webp",
+        "image": "https://placehold.co/400x400/fff8e1/ff8f00?text=Lion+Chair",
         "id": 6,
         "name": "Лев",
         "price": 1550,
-        "category": ["chairs"]
+        "category": ["chairs"],
+        "rating": 0, 
+        "availability": "Очікується"
     },
     {
-        "image": "/only-shop/img/soft-toys/мякі-іграшки/пікачу/pickachy.webp",
+        "image": "https://placehold.co/400x400/fffde7/fbc02d?text=Pikachu+Toy",
         "id": 7,
+        "article": "TY-PK99",
         "name": "Пікачу",
         "price": 799,
+        "category": "toys",
+        "rating": 4.9,
+        "reviewsQuantity": 89,
+        "availability": "В наявності"
+    },
+    {
+        "id": 8,
+        "name": "Авокадо (Міні)",
+        "price": 499,
         "category": "toys"
     },
     {
-        "image": "/only-shop/img/soft-toys/мякі-іграшки/авокадо/avocado.webp",
-        "id": 8,
-        "name": "Авокадо",
-        "price": 1499,
-        "category": "toys"
+        "image": "https://placehold.co/400x400/e0f7fa/00838f?text=Snorlax+Toy",
+        "id": 9,
+        "article": "TY-SN00",
+        "name": "Снорлакс Великий",
+        "discount": 0.5,
+        "price": 3000,
+        "category": ["toys"],
+        "rating": 4.7,
+        "reviewsQuantity": 55,
+        "specialOffer": true,
+        "availability": "Немає в наявності"
+    },
+    {
+        "image": "", 
+        "id": 10,
+        "article": "SL-UN01",
+        "name": "Єдиноріг",
+        "price": 850,
+        "category": "slippers",
+        "availability": "В наявності",
+        "options": [
+            {
+                "type": "size",
+                "values": ["S"]
+            }
+        ]
+    },
+    {
+        "image": "https://placehold.co/400x400/efebe9/4e342e?text=Capybara+Chair",
+        "id": 11,
+        "article": "CH-CP99",
+        "name": "Капібара",
+        "discount": 0.05,
+        "price": "2500", 
+        "category": ["chairs"],
+        "rating": 5,
+        "reviewsQuantity": 999,
+        "specialOffer": false,
+        "availability": "В наявності",
+        "options": [
+            {
+                "type": "color",
+                "values": ["#8B4513", "#A0522D"]
+            },
+            {
+                "type": "size",
+                "values": ["XL", "XXL"]
+            }
+        ]
+    },
+    {
+        "image": "https://placehold.co/400x400/fce4ec/c2185b?text=Mystery+Box",
+        "id": 12,
+        "article": "MYSTERY-1",
+        "name": "Секретний бокс",
+        "price": 999,
+        "rating": 4.0,
+        "reviewsQuantity": 10,
+        "availability": "В наявності"
     }
 ]

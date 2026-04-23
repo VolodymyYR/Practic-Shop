@@ -39,15 +39,14 @@
 
 .quantity {
     display: flex;
-    flex-direction: column;
-    width: 40px;
-    aspect-ratio: 1/4;
+    height: 40px;
     border: #eee solid 1px;
     justify-content: space-between;
 
 }
 .quantity__btn {
     aspect-ratio: 1/1;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,4 +80,88 @@ input[type=number] {
     text-align: center;
     border: none;
     outline: none;
+}
+
+/* =========================== */
+
+.radio-button {
+    position: relative;
+    height: 30px;
+    aspect-ratio: 1/1;
+}
+.radio-button__input {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.radio-button__input:checked + .radio-button__decor{
+    border: 3px solid #e4c200;
+}
+
+.radio-button__decor {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #eee;
+    border-radius: 4px;
+}
+.radio-button__decor::before{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    content: "✓";
+    color: #e4c200;
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.radio-button__input:checked + .radio-button__decor::before{
+    display: block;
+}
+
+.radio-button__input + .radio-button__decor.decor--content::before{
+    display: block;
+    content: var(--size-product);
+    color: #e2e2e2;
+}
+
+.radio-button__input:checked + .radio-button__decor.decor--content::before{
+    color: #e4c200;
+}
+
+/* ========================== */
+
+.price {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2px;
+}
+
+.price__old {
+    color: rgba(0, 0, 0, 0.3);
+    text-decoration: line-through;
+    font-size: 14px;
+    font-weight: 900;
+}
+.price__now {
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.price__discount {
+    border-radius: 8px;
+    border: 1px solid #ff4444;
+    color: #ff4444;
+    padding: 4px 8px;
+    font-weight: 300;
+    font-size: 14px;
 }

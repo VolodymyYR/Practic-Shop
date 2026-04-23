@@ -18,12 +18,20 @@ const nameCategory = (itemProduct) => {
     }
 }
 
+const tagDiscount = (discount) => `<div class="price__discount">${parseFloat(discount) * 100}%</div>`
+
 // Формуємо блок з ціною товару, враховуючи чи є стара ціна (для акційних товарів)
 const priceProductOld = (itemProduct) =>  `
     <div class="price__old">${itemProduct.price}</div>
     <div class="price__now">
         <span>${Number(itemProduct.price) * (1 - parseFloat(itemProduct.discount))}</span>
-        <div class="price__discount">${parseFloat(itemProduct.discount) * 100}%</div>
+        ${tagDiscount(itemProduct.discount)}
+    </div>`;
+
+const priceProductOldSimple = (itemProduct) =>  `
+    <div class="price__old">${itemProduct.price}</div>
+    <div class="price__now">
+        <span>${Number(itemProduct.price) * (1 - parseFloat(itemProduct.discount))}</span>
     </div>`;
 
 // Формуємо блок з ціною товару для звичайних товарів без акції
@@ -46,7 +54,7 @@ const optionsProduct = (options) => {
     return options.values.map(value =>`
     <label class="options__item radio-button">
         <input class="radio-button__input" value="${value}" type="radio" name="${options.type}" id="">
-        <span class="radio-button__decor" style="--${options.type}-product: ${value};"></span>
+        <span class="radio-button__decor ${options.type === 'size' ? '_size' : ''}" ${options.type === 'size' ? `data-size="${value}"` : `style="--${options.type}-product: ${value};"`}></span>
     </label>
 `).join('');
 };
@@ -137,10 +145,16 @@ export function renderBasketCard(products){
         const cardElement = cardClone.querySelector('.item-content-basket');
 
         if(cardElement){
-            const mainImg = cardElement.querySelector('.item-content-basket__photo');
-            if (mainImg && product.image){ 
-                mainImg.src = product.image;
-                mainImg.alt = product.name;
+            const imgElement = cardElement.querySelector(".item-content-basket__image");
+            if (imgElement) {
+                if(product.discount){
+                imgElement.insertAdjacentHTML('beforeend', tagDiscount(product.discount));
+                }
+                const imgPhoto = imgElement.querySelector('img');
+                if(imgPhoto){
+                    imgPhoto.src = product.image;
+                    imgPhoto.alt = product.name;
+                }
             }
 
             const titleProduct = cardElement.querySelector('.item-content-basket__title');
@@ -173,7 +187,7 @@ export function renderBasketCard(products){
 
             const price = cardElement.querySelector(".price");
             if(price && product.price){
-                price.innerHTML = product.discount ? priceProductOld(product) : priceProductActual(product);
+                price.innerHTML = product.discount ? priceProductOldSimple(product) : priceProductActual(product);
             } else {
                 price?.remove();
             }

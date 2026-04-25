@@ -19,27 +19,25 @@ const nameCategory = (itemProduct) => {
 }
 
 // Discount div -----------------------------------------------------------------------------------------------
+const calculatePriceDiscount = (price, discount) => {
+    const p = parseFloat(price) || 0;
+    const d = parseFloat(discount) || 0;
+    return Math.round(p * (1 - d));
+} 
+
 const tagDiscount = (discount) => `<div class="price__discount">${parseFloat(discount) * 100}%</div>`
 
-// Формуємо блок з ціною товару, враховуючи чи є стара ціна (для акційних товарів) ----------------------------
-const priceProductOld = (itemProduct) =>  `
-    <div class="price__old">${itemProduct.price}</div>
-    <div class="price__now">
-        <span>${Number(itemProduct.price) * (1 - parseFloat(itemProduct.discount))}</span>
-        ${tagDiscount(itemProduct.discount)}
-    </div>`;
+const priceProductBlock = (itemProduct, showBadge) => {
+    const badge = showBadge ? tagDiscount(itemProduct.discount) : '';
 
-// Блок ціни зі знижкою без відображення відсотку знижки ------------------------------------------------------
-const priceProductOldSimple = (itemProduct) =>  `
-    <div class="price__old">${itemProduct.price}</div>
-    <div class="price__now">
-        <span>${Number(itemProduct.price) * (1 - parseFloat(itemProduct.discount))}</span>
-    </div>`;
-
-// Формуємо блок з ціною товару для звичайних товарів без акції ----------------------------------------------
-const priceProductActual = (itemProduct) => `
-        <div class="price__now"><span>${itemProduct.price}</span>₴</div>
-    `;
+    return `
+        <div class="price__old">${itemProduct.price}</div>
+        <div class="price__now">
+            <span>${calculatePriceDiscount(itemProduct.price, itemProduct.discount)}</span>
+            ${badge}
+        </div>
+    `
+}
 
 // Блок з відображеням певних варіацій продукту --------------------------------------------------------------
 const optionsProductContainer = (itemProduct) => {
@@ -118,7 +116,7 @@ export function renderMainCards(products) {
             // Блок з ціною товару
             const priceBoxElement = cardElement.querySelector(`[${PRODUCT_ATTRS.productPriceBlock}]`);
             if (priceBoxElement) {
-                priceBoxElement.innerHTML = product.discount ? priceProductOld(product) : priceProductActual(product);
+                priceBoxElement.innerHTML = priceProductBlock(product, true);
             }
 
             // Зірковий рейтинг
@@ -222,7 +220,7 @@ export function renderBasketCard(products){
             // Ціна
             const price = cardElement.querySelector(`[${PRODUCT_ATTRS.productPriceBlock}]`);
             if(price && product.price){
-                price.innerHTML = product.discount ? priceProductOldSimple(product) : priceProductActual(product);
+                price.innerHTML = priceProductBlock(product, false);
             } else {
                 price?.remove();
             }

@@ -1,5 +1,6 @@
-// Оновлення значення лічильника 
+import { COUNTER } from "./attrs.js";
 
+// Оновлення значення лічильника 
 const updateValue = (input, newValue) => {
     const min = parseInt(input.min) || 1;
     const max = parseInt(input.max) || +Infinity;
@@ -23,8 +24,8 @@ const updateValue = (input, newValue) => {
 
 // Ініціалізація лічильника ==========================================================
 export const actionCounter = (btn) =>{
-    const container = btn.closest('[data-js-counter]');
-    const input = container.querySelector('[data-js-counter-input]');
+    const container = btn.closest(`[${COUNTER.counter}]`);
+    const input = container.querySelector(`[${COUNTER.counterInput}]`);
     
     if(input){
         const step = parseFloat(input.step) || 1;

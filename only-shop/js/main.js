@@ -124,13 +124,13 @@ document.addEventListener("click", (e) => {
         resetAllFilter();
     }
     // Change counter -----------------------------------------------
-    if (e.target.closest(`[${LIST_BUTTONS.btnCounter}]`)) {
+    if (e.target.closest(`[${COUNTER.counterBtn}]`)) {
         actionCounter(e.target)
     }
 
     // Remove card from basket and Local Storage --------------------
     if(e.target.closest(`[${LIST_BUTTONS.btnRemove}]`)){
-        const cardProduct = e.target.closest(`[${PRODUCT_ATTRS.productCard}]`)
+        const cardProduct = e.target.closest(`[${PRODUCT_ATTRS.productCardBasket}]`)
         const cardProductID = cardProduct.dataset.jsProductId;
         removeLocalStorage(cardProductID)
         cardProduct.remove();
@@ -141,7 +141,7 @@ document.addEventListener("click", (e) => {
 document.addEventListener('change', (e) => {
 
     // Change input in counter
-    if (e.target.hasAttribute(`[${COUNTER.inputCounter}]`)){
+    if (e.target.hasAttribute(`[${COUNTER.counterInput}]`)){
         changeInput(e.target)
     }
 })
@@ -155,7 +155,7 @@ document.addEventListener('counter:change', (e) => {
         return
     }
 
-    const productCard = input.closest(`[${PRODUCT_ATTRS.productCard}]`);
+    const productCard = input.closest(`[${PRODUCT_ATTRS.productCardBasket}]`);
     if(!productCard){
         console.error(`[BasketError]: Відсутній атрибут у батьківськї картка товару ${BASKET_ATTRS.productCard}`, input)
         return

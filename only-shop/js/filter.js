@@ -4,6 +4,7 @@ import { priceInput } from "./slider.js";
 import { renderMainCards } from "./render.js";
 import { setupSlider } from "./slider.js";
 import { maxPriceValues } from "./main.js";
+import { FILTER } from "./attrs.js";
 
 // ======================================================================================
 // ============================== FILTER FUNCTIONS ======================================
@@ -14,8 +15,6 @@ let initialProducts = [];
 export const setInitialProducts = (products) => {
     initialProducts = products;
 };
-
-// const restartBtn = document.querySelector("[data-js-clear-filter]");
 
 // Apply all filters to the products and return the filtered list
 export const applyFilter = () => {
@@ -42,7 +41,7 @@ function filterPrice (filteredItems, priceMin, priceMax){
 
 // Filter products by selected categories
 function filterCategory(filteredItems) {
-    let categoryButtons = document.querySelectorAll(".group-filter__item.category input:checked");
+    let categoryButtons = document.querySelectorAll(`[${FILTER.optionCategory}] input:checked`);
     if (categoryButtons.length === 0) {
         return filteredItems; 
     } 
@@ -56,7 +55,7 @@ function filterCategory(filteredItems) {
 
 // Filter product by special ofter
 function filterSpecialOffer(filteredItems) {
-    const specialOfferCheckbox = document.querySelector(".group-filter__item.special-offer input");
+    const specialOfferCheckbox = document.querySelector(`[${FILTER.optionSpecialOffer}] input`);
     if (!specialOfferCheckbox || !specialOfferCheckbox.checked) {
         return filteredItems;
     }
@@ -68,7 +67,7 @@ function filterSpecialOffer(filteredItems) {
 // ===================================================================================
 
 export function resetAllFilter(){
-    let activeInputs = document.querySelectorAll(".group-filter__item input:checked");
+    let activeInputs = document.querySelectorAll(`[${FILTER.group}]`);
     activeInputs.forEach(btn => btn.checked = false);
 
     priceInput[0].value = 0;
@@ -77,16 +76,3 @@ export function resetAllFilter(){
     renderMainCards(initialProducts);
     setupSlider(maxPriceValues(initialProducts));
 }
-
-// if (restartBtn) {
-//     restartBtn.addEventListener("click", () => {
-//         let activeInputs = document.querySelectorAll(".group-filter__item input:checked");
-//         activeInputs.forEach(btn => btn.checked = false);
-
-//         priceInput[0].value = 0;
-//         priceInput[1].value = maxPriceValues(initialProducts);
-//         // renderProducts(initialProducts);
-//         renderMainCards(initialProducts);
-//         setupSlider(maxPriceValues(initialProducts));
-//     })
-// }

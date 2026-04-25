@@ -1,3 +1,5 @@
+import { RUN_ROW } from "./attrs.js";
+
 // Effects functions for the Only Shop application
 
 // Run-row effect for elements with the class "run-row" ============================================================
@@ -8,13 +10,14 @@
 // data-split - optional content to alternate with the main content (default: none)
 
 export function runRow () {
-    const elements = document.querySelectorAll('.run-row');
+    const elements = document.querySelectorAll(`[${RUN_ROW.runRow}]`);
     elements.forEach(el => {
-        const speed = el.getAttribute('data-speed') || 5;
-        const gapRow = parseInt(el.getAttribute('data-gap')) || 10;
+        const speed = el.getAttribute(`${RUN_ROW.runRowSpeed}`) || 5;
+        const gapRow = parseInt(el.getAttribute(`${RUN_ROW.runRowGap}`)) || 10;
         const halfGap = gapRow / 2;
-        const pauseOnHover = el.getAttribute('data-pause') === 'true';
-        const splitContent = el.getAttribute('data-split') || false;
+        const pauseOnHover = el.getAttribute(`${RUN_ROW.runRowPause}`) === 'true';
+        const splitContent = el.getAttribute(`${RUN_ROW.runRowSplit}`) || false;
+        console.log(splitContent)
         const content = el.innerHTML;
         const widthContent = el.offsetWidth;
 

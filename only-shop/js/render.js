@@ -3,8 +3,7 @@
 import { runRow } from "./effects.js";
 import { mainCardProduct } from "./componentsHTML.js";
 import { basketCardProduct } from "./componentsHTML.js";
-import { getBasketFromLocalStorage } from "./basket.js";
-import { PRODUCT_ATTRS } from "./attrs.js";
+import { COUNTER, PRODUCT_ATTRS } from "./attrs.js";
 
 // ================================ GLOBAL FUNCTIONS ================================
 // ==================================================================================
@@ -97,7 +96,7 @@ export function renderMainCards(products) {
     // Перебираємо весь товар і рендеримо картку для кожного
     products.forEach(product => {
         const cardClone = templateMainCardContent.cloneNode(true);
-        const cardElement = cardClone.querySelector(".item-content-shop");
+        const cardElement = cardClone.querySelector(`[${PRODUCT_ATTRS.productCardMain}]`);
 
         if (cardElement) {
             // Додаємо атрибут який буде иістити ID
@@ -111,19 +110,19 @@ export function renderMainCards(products) {
             }
 
             // Назва товару
-            const titleElement = cardElement.querySelector(".item-content-shop__title");
+            const titleElement = cardElement.querySelector(`[${PRODUCT_ATTRS.productTitle}]`);
             if (titleElement) {
                 titleElement.textContent = nameCategory(product);
             }
 
             // Блок з ціною товару
-            const priceBoxElement = cardElement.querySelector(".price");
+            const priceBoxElement = cardElement.querySelector(`[${PRODUCT_ATTRS.productPriceBlock}]`);
             if (priceBoxElement) {
                 priceBoxElement.innerHTML = product.discount ? priceProductOld(product) : priceProductActual(product);
             }
 
             // Зірковий рейтинг
-            const ratingStarsElement = cardElement.querySelector(".rating-stars");
+            const ratingStarsElement = cardElement.querySelector(`[${PRODUCT_ATTRS.productRatingStars}]`);
             if (ratingStarsElement && product.rating !== undefined) {
                 ratingStarsElement.style.setProperty('--rating-percent', product.rating ? `${(product.rating / 5) * 100}%` : '0%');
             } else {
@@ -131,7 +130,7 @@ export function renderMainCards(products) {
             }
             
             // Плашка знижки
-            const discountBadgeElement = cardElement.querySelector(".item-content-shop__discount");
+            const discountBadgeElement = cardElement.querySelector(`[${PRODUCT_ATTRS.productDiscount}]`);
             if (discountBadgeElement && product.specialOffer !== undefined) {
                 discountBadgeElement.style.display = product.specialOffer ? 'block' : 'none';
             } else {
@@ -149,7 +148,7 @@ export function renderMainCards(products) {
 
 // Render basket cards on the shop page =============================
 export function renderBasketCard(products){
-    const basket = document.querySelector('.content-basket');
+    const basket = document.querySelector(`[${PRODUCT_ATTRS.productParentContainer}]`);
 
     if(!basket){
         console.log("Basket noun")
@@ -166,7 +165,7 @@ export function renderBasketCard(products){
 
     products.forEach(product =>{
         const cardClone = templateBasketCardContent.cloneNode(true);
-        const cardElement = cardClone.querySelector('.item-content-basket');
+        const cardElement = cardClone.querySelector(`[${PRODUCT_ATTRS.productCardBasket}]`);
 
         if(cardElement){
             // Встановлюємо атрибут який містить ID
@@ -176,7 +175,7 @@ export function renderBasketCard(products){
             cardElement.dataset.jsProductPrice = product.price;
 
             // Встановлюємо шлях до зображення 
-            const imgElement = cardElement.querySelector(".item-content-basket__image");
+            const imgElement = cardElement.querySelector(`[${PRODUCT_ATTRS.productImg}]`);
             if (imgElement) {
                 if(product.discount){
                 imgElement.insertAdjacentHTML('beforeend', tagDiscount(product.discount));
@@ -189,7 +188,7 @@ export function renderBasketCard(products){
             }
 
             // Встановлюємо назву товару
-            const titleProduct = cardElement.querySelector('.item-content-basket__title');
+            const titleProduct = cardElement.querySelector(`[${PRODUCT_ATTRS.productTitle}]`);
             if(titleProduct && product.name){
                 titleProduct.textContent = nameCategory(product);
             } else {
@@ -197,7 +196,7 @@ export function renderBasketCard(products){
             }
 
             // ЗІрковий рейтинг
-            const ratingStars = cardElement.querySelector('.rating-stars');
+            const ratingStars = cardElement.querySelector(`[${PRODUCT_ATTRS.productRatingStars}]`);
             if (ratingStars && product.rating != undefined){
                 ratingStars.style.setProperty('--rating-percent', product.rating ? `${(product.rating / 5) * 100}%` : '0%');
             } else {
@@ -205,7 +204,7 @@ export function renderBasketCard(products){
             }
 
             // Середня оцінка ористувачів та кількість відгуків
-            const reviewsStatistic = cardElement.querySelector('.item-content-basket__reviews-statistic');
+            const reviewsStatistic = cardElement.querySelector(`[${PRODUCT_ATTRS.productRatingStatic}]`);
             if(reviewsStatistic && product.rating){
                 reviewsStatistic.textContent = `(${(product.rating / 5) * 10}${product.reviewsQuantity ? ` - ${product.reviewsQuantity} Reviews`: ""})`; 
             } else {
@@ -213,7 +212,7 @@ export function renderBasketCard(products){
             }
 
             // Артикул товару
-            const article = cardElement.querySelector('.item-content-basket__article');
+            const article = cardElement.querySelector(`[${PRODUCT_ATTRS.productArticle}]`);
             if(article && product.article){
                 article.querySelector('span').textContent = product.article;
             } else {
@@ -221,7 +220,7 @@ export function renderBasketCard(products){
             }
 
             // Ціна
-            const price = cardElement.querySelector(".price");
+            const price = cardElement.querySelector(`[${PRODUCT_ATTRS.productPriceBlock}]`);
             if(price && product.price){
                 price.innerHTML = product.discount ? priceProductOldSimple(product) : priceProductActual(product);
             } else {
@@ -229,27 +228,27 @@ export function renderBasketCard(products){
             }
 
             // Блок з детальною інформацією (Варіації товару)
-            const contentOptions = cardElement.querySelector('.item-content-basket__details-product');
+            const contentOptions = cardElement.querySelector(`[${PRODUCT_ATTRS.productDetails}]`);
             if(contentOptions && product.options){
                 contentOptions.innerHTML = optionsProductContainer(product);
             }
 
             // Лічильник
-            const quantity = cardElement.querySelector('.quantity');
+            const quantity = cardElement.querySelector(`[${COUNTER.counter}]`);
             if(quantity){
                 const input = quantity.querySelector('input');
                 input.value = product.quantity
             }
 
             // Ціна товару
-            const wholeRow = cardElement.querySelector('.item-content-basket__cost');
+            const wholeRow = cardElement.querySelector(`[${PRODUCT_ATTRS.productCostBlock}]`);
             if(wholeRow){
-                const whole = wholeRow.querySelector('b');
-                cost(whole, product.price, product.quantity);
+                // const whole = wholeRow.querySelector('b');
+                cost(wholeRow, product.price, product.quantity);
             }
 
             // чи є даний продукт
-            const availability = cardElement.querySelector(".item-content-basket__status");
+            const availability = cardElement.querySelector(`[${PRODUCT_ATTRS.productStatus}]`);
             if (availability){
                 const availabilityText = availability.querySelector('span');
                 availabilityText.textContent = product.availability;

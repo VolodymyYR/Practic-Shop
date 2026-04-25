@@ -1,6 +1,9 @@
 // HTML templates for the Only Shop application
 
+// ===================================================================================================
 // Main card product =================================================================================
+// ===================================================================================================
+
 export const mainCardProduct = `
     <div class="content-shop__item item-content-shop">
         <div class="item-content-shop__photo">
@@ -21,9 +24,11 @@ export const mainCardProduct = `
 `;
 
 // =====================================================================================================
+// Card product in basket ==============================================================================
+// =====================================================================================================
 
 export const basketCardProduct = `
-    <div class="content-basket__item item-content-basket">
+    <div class="content-basket__item item-content-basket" data-js-basket-item>
         <div class="item-content-basket__product">
             <div class="item-content-basket__image">
                 <img class="item-content-basket__photo" src="" alt="">
@@ -54,7 +59,7 @@ export const basketCardProduct = `
                     </div>
                     <div class="item-content-basket__cost">
                         <span>Загальна вартість:</span>
-                        <b></b>
+                        <b data-js-product-cost></b>
                     </div>
                 </div>
                 <div class="item-content-basket__status">

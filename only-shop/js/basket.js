@@ -8,7 +8,7 @@ import { allProducts } from "./main.js";
 
 // Add a product to the basket ========================================================================
 export function addToBasket(product) {
-    let basket = getCardFromLocalStorage('basket') || [];
+    let basket = getFromLocalStorage('basket') || [];
     const existingProductIndex = basket.findIndex(item => item.id === product);
 
     if (existingProductIndex !== -1) {
@@ -17,28 +17,14 @@ export function addToBasket(product) {
         basket.push({ id: product, quantity: 1 });
     }
 
-    saveCardToLocalStorage('basket', basket);
-}
-
-// Local Storage management functions =================================================================
-function saveCardToLocalStorage(key, CARD_ARRAY) {
-    localStorage.setItem(key, JSON.stringify(CARD_ARRAY));
-}
-
-// Get a product from local storage by key ============================================================
-export function getCardFromLocalStorage(key) {
-    const value = localStorage.getItem(key);
-    return value ? JSON.parse(value) : null;
+    saveToLocalStorage('basket', basket);
 }
 
 // Get the full product details for items in the basket ===============================================
 export function getBasketFromLocalStorage() {
-    const basketItems = getCardFromLocalStorage('basket');
+    const basketItems = getFromLocalStorage('basket');
     if (!basketItems || basketItems.length === 0) return [];
-    // const allBasket = allProducts.filter(product => {
-    //     return basketItems.some(item => String(item.id) === String(product.id));
-    // });
-
+    
     const fullBasket = basketItems.map(basketItem =>{
         const productData = allProducts.find(product => String(product.id) === String(basketItem.id));
 
@@ -54,4 +40,26 @@ export function getBasketFromLocalStorage() {
 
 
     return fullBasket.filter(item => item != null);
+}
+
+// =========================================================================================
+// ============================== LOCAL STORAGE ==============================
+// =========================================================================================
+
+// Local Storage management functions =================================================================
+function saveToLocalStorage(key, CARD_ARRAY) {
+    localStorage.setItem(key, JSON.stringify(CARD_ARRAY));
+}
+
+// Get a product from local storage by key ============================================================
+export function getFromLocalStorage(key) {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : null;
+}
+
+// Remove from Local Storage ==========================================================================
+export function removeLocalStorage(id){
+    let localStorageBasket = getFromLocalStorage('basket');
+    localStorageBasket = localStorageBasket.filter(item=> parseInt(item.id) !== parseInt(id));
+    saveToLocalStorage('basket', localStorageBasket);
 }

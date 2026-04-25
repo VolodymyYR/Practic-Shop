@@ -96,9 +96,11 @@
     display: flex;
     padding: 0 0 0 15px;
     border-radius: 8px;
-    border: 1px solid #eee;
+    /* border: 1px solid #eee; */
     gap: 20px;
     overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 /* ----- */
@@ -109,8 +111,6 @@
     padding: 12px 0;
     gap: 20px;
     flex-grow: 1;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 /* ----- */
@@ -234,6 +234,7 @@
     align-items: center;
     column-gap: 15px;
     flex-wrap: wrap;
+    inline-size: 100%;
 }
 .item-content-basket__cost {
 }

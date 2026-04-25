@@ -1,3 +1,5 @@
+// Оновлення значення лічильника 
+
 const updateValue = (input, newValue) => {
     const min = parseInt(input.min) || 1;
     const max = parseInt(input.max) || +Infinity;
@@ -19,6 +21,7 @@ const updateValue = (input, newValue) => {
     }));
 };
 
+// Ініціалізація лічильника ==========================================================
 export const actionCounter = (btn) =>{
     const container = btn.closest('[data-counter]');
     const input = container.querySelector('[data-counter-input]');
@@ -32,6 +35,7 @@ export const actionCounter = (btn) =>{
     }
 }
 
+// Функція яка передає значення при ручному введені значення
 export const changeInput = (input) => {
     updateValue(input, input.value);
 }

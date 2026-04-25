@@ -54,6 +54,7 @@ function filterCategory(filteredItems) {
     });
 }
 
+// Filter product by special ofter
 function filterSpecialOffer(filteredItems) {
     const specialOfferCheckbox = document.querySelector(".group-filter__item.special-offer input");
     if (!specialOfferCheckbox || !specialOfferCheckbox.checked) {

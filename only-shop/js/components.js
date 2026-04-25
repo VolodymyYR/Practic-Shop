@@ -23,13 +23,13 @@ const updateValue = (input, newValue) => {
 
 // Ініціалізація лічильника ==========================================================
 export const actionCounter = (btn) =>{
-    const container = btn.closest('[data-counter]');
-    const input = container.querySelector('[data-counter-input]');
+    const container = btn.closest('[data-js-counter]');
+    const input = container.querySelector('[data-js-counter-input]');
     
     if(input){
         const step = parseFloat(input.step) || 1;
         const current = parseInt(input.value) || 0;
-        const direction = btn.dataset.counterBtn === 'plus' ? 1 : -1;
+        const direction = btn.dataset.jsCounterBtn === 'plus' ? 1 : -1;
 
         updateValue(input, current + (step * direction));
     }

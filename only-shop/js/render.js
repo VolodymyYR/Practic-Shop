@@ -4,6 +4,7 @@ import { runRow } from "./effects.js";
 import { mainCardProduct } from "./componentsHTML.js";
 import { basketCardProduct } from "./componentsHTML.js";
 import { getBasketFromLocalStorage } from "./basket.js";
+import { PRODUCT_ATTRS } from "./attrs.js";
 
 // ================================ GLOBAL FUNCTIONS ================================
 // ==================================================================================
@@ -75,7 +76,7 @@ export let cost = (costBlock, price, quantity) =>{
 
 // Render main cards on the shop page =============================
 export function renderMainCards(products) {
-    const mainList = document.querySelector(".card-items");
+    const mainList = document.querySelector(`[${PRODUCT_ATTRS.productParentContainer}]`);
     
     // Перевірка чи є батьківський блок
     if (!mainList) {
@@ -100,7 +101,7 @@ export function renderMainCards(products) {
 
         if (cardElement) {
             // Додаємо атрибут який буде иістити ID
-            cardElement.dataset.id = product.id;
+            cardElement.dataset.jsProductId = product.id;
 
             // Вставляємо зображення і назву для нього
             const imgElement = cardElement.querySelector("img");
@@ -133,6 +134,8 @@ export function renderMainCards(products) {
             const discountBadgeElement = cardElement.querySelector(".item-content-shop__discount");
             if (discountBadgeElement && product.specialOffer !== undefined) {
                 discountBadgeElement.style.display = product.specialOffer ? 'block' : 'none';
+            } else {
+                discountBadgeElement.remove();
             }
         }
         fragment.appendChild(cardClone);

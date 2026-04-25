@@ -12,9 +12,17 @@ import { actionCounter } from "./components.js";
 import { changeInput } from "./components.js";
 import { removeLocalStorage } from "./basket.js";
 import { cost } from "./render.js";
+import { resetAllFilter } from "./filter.js";
+import { PRODUCT_ATTRS } from "./attrs.js";
+import { LIST_BUTTONS } from "./attrs.js";
+import { COUNTER } from "./attrs.js";
+
 
 export let allProducts = [];
-const filterBtn = document.querySelector(".filter-btn");
+
+// =======================================================================================================================
+// =======================================================================================================================
+// =======================================================================================================================
 
 export const maxPriceValues = (products) =>{
     if(!products || products.length === 0) return 1000;
@@ -79,40 +87,51 @@ document.addEventListener("DOMContentLoaded", async () => {
 // НАТИСКАННЯ ================================================================
 
 document.addEventListener("click", (e) => {
-
     // Filter list products ----------------------------------------
-    if (e.target === filterBtn) {
+    if (e.target.closest(`[${LIST_BUTTONS.btnFilter}]`)) {
         const filtered = applyFilter(allProducts);
         renderMainCards(filtered);
     }  
 
     // Add product to Local Storage --------------------------------
-    if (e.target.classList.contains("add-btn")) {
-        const productCard = e.target.closest(".item-content-shop");
-        const productId = Number(productCard.dataset.id);
+    if (e.target.closest(`[${LIST_BUTTONS.btnAddInLS}]`)) {
+        const productCard = e.target.closest(`[${PRODUCT_ATTRS.productCard}]`);
+        if (!productCard){
+            console.error(`[CARD_PRODUCT] не має батьківського контейнера`)
+            return
+        }
+        const productId = Number(productCard.dataset.jsProductId);
         const product = allProducts.find(p => p.id === productId);
-        if (product) {
-            const idCard = product.id;
-            addToBasket(idCard);
+        if (!productId){
+            console.error(`[CARD_PRODUCT] Не має співпадіння ${productId} і id з каталогу` )
+            return
+        }
+        if (productId) {
+            console.log(productId)
+            addToBasket(productId);
         }
     }
 
     // Full remove Local Storage and Parent Container ---------------
-    if (e.target.classList.contains("clear-basket")) {
+    if (e.target.classList.contains(`[${LIST_BUTTONS.btnResetLocalStorage}]`)) {
         localStorage.clear();
-        const parentsBlock = document.querySelector(".card-items");
+        const parentsBlock = document.querySelector(`[${PRODUCT_ATTRS.productParentContainer}]`);
         parentsBlock.replaceChildren();
     }
 
+    // Reset all settings in Filter --------------------------------- 
+    if (e.target.closest(`[${LIST_BUTTONS.btnFilterClear}]`)){
+        resetAllFilter();
+    }
     // Change counter -----------------------------------------------
-    if (e.target.closest("[data-counter-btn]")) {
+    if (e.target.closest(`[${LIST_BUTTONS.btnCounter}]`)) {
         actionCounter(e.target)
     }
 
     // Remove card from basket and Local Storage --------------------
-    if(e.target.closest('.item-content__remove')){
-        const cardProduct = e.target.closest('.item-content-basket')
-        const cardProductID = cardProduct.dataset.id;
+    if(e.target.closest(`[${LIST_BUTTONS.btnRemove}]`)){
+        const cardProduct = e.target.closest(`[${PRODUCT_ATTRS.productCard}]`)
+        const cardProductID = cardProduct.dataset.jsProductId;
         removeLocalStorage(cardProductID)
         cardProduct.remove();
     }
@@ -122,19 +141,12 @@ document.addEventListener("click", (e) => {
 document.addEventListener('change', (e) => {
 
     // Change input in counter
-    if (e.target.hasAttribute('data-counter-input')){
+    if (e.target.hasAttribute(`[${COUNTER.inputCounter}]`)){
         changeInput(e.target)
     }
 })
 
 // ------------------------------------------------------------------
-
-const BASKET_ATTRS = {
-    itemCard: 'data-js-basket-item',
-    productId: 'data-js-product-id',
-    costBlock: 'data-js-product-cost',
-    productPrice: 'data-js-product-price'
-}
 
 document.addEventListener('counter:change', (e) => {
     const { value, input} = e.detail;
@@ -143,24 +155,24 @@ document.addEventListener('counter:change', (e) => {
         return
     }
 
-    const productCard = input.closest(`[${BASKET_ATTRS.itemCard}]`);
+    const productCard = input.closest(`[${PRODUCT_ATTRS.productCard}]`);
     if(!productCard){
-        console.error(`[BasketError]: Відсутній атрибут у батьківськї картка товару ${BASKET_ATTRS.itemCard}`, input)
+        console.error(`[BasketError]: Відсутній атрибут у батьківськї картка товару ${BASKET_ATTRS.productCard}`, input)
         return
     }
-    const costProduct = productCard.querySelector(`[${BASKET_ATTRS.costBlock}]`);
+    const costProduct = productCard.querySelector(`[${PRODUCT_ATTRS.productCostBlock}]`);
     if(!costProduct){
-        console.error(`[BasketError]: Відсутній блок для виведення ціни ${BASKET_ATTRS.costBlock}`, productCard);
+        console.error(`[BasketError]: Відсутній блок для виведення ціни ${BASKET_ATTRS.productCostBlock}`, productCard);
         return
     }
-    const id = productCard.getAttribute(BASKET_ATTRS.productId);
+    const id = productCard.getAttribute(PRODUCT_ATTRS.productId);
     if(!id){
         console.error(`[BasketError]: Відсутнє id продукту ${BASKET_ATTRS.productId}`, productCard);
         return
     }
-    const basePriceProduct = productCard.getAttribute(BASKET_ATTRS.productPrice);
+    const basePriceProduct = productCard.getAttribute(PRODUCT_ATTRS.productPrice);
     if(!basePriceProduct){
-        const id = productCard.getAttribute(BASKET_ATTRS.productId);
+        const id = productCard.getAttribute(PRODUCT_ATTRS.productId);
         console.error(`[BasketError]: Відсутня ціна продукту ${BASKET_ATTRS.productPrice} у продукта ${id}`, productCard);
         return
     }

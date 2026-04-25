@@ -15,7 +15,7 @@ export const setInitialProducts = (products) => {
     initialProducts = products;
 };
 
-const restartBtn = document.querySelector(".restart-filter");
+// const restartBtn = document.querySelector("[data-js-clear-filter]");
 
 // Apply all filters to the products and return the filtered list
 export const applyFilter = () => {
@@ -67,15 +67,26 @@ function filterSpecialOffer(filteredItems) {
 // ==================== RESTART FILTER ===============================================
 // ===================================================================================
 
-if (restartBtn) {
-    restartBtn.addEventListener("click", () => {
-        let activeInputs = document.querySelectorAll(".group-filter__item input:checked");
-        activeInputs.forEach(btn => btn.checked = false);
+export function resetAllFilter(){
+    let activeInputs = document.querySelectorAll(".group-filter__item input:checked");
+    activeInputs.forEach(btn => btn.checked = false);
 
-        priceInput[0].value = 0;
-        priceInput[1].value = maxPriceValues(initialProducts);
-        // renderProducts(initialProducts);
-        renderMainCards(initialProducts);
-        setupSlider(maxPriceValues(initialProducts));
-    })
+    priceInput[0].value = 0;
+    priceInput[1].value = maxPriceValues(initialProducts);
+    // renderProducts(initialProducts);
+    renderMainCards(initialProducts);
+    setupSlider(maxPriceValues(initialProducts));
 }
+
+// if (restartBtn) {
+//     restartBtn.addEventListener("click", () => {
+//         let activeInputs = document.querySelectorAll(".group-filter__item input:checked");
+//         activeInputs.forEach(btn => btn.checked = false);
+
+//         priceInput[0].value = 0;
+//         priceInput[1].value = maxPriceValues(initialProducts);
+//         // renderProducts(initialProducts);
+//         renderMainCards(initialProducts);
+//         setupSlider(maxPriceValues(initialProducts));
+//     })
+// }

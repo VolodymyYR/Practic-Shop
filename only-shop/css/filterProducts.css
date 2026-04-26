@@ -1,7 +1,7 @@
 .filter {
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--color-surface);
     border-radius: 20px;
-    box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--box-shadow);
     padding: 30px 20px;
     display: flex;
     flex-direction: column;

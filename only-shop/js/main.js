@@ -11,7 +11,7 @@ import { getBasketFromLocalStorage } from "./basket.js";
 import { actionCounter } from "./components.js";
 import { changeInput } from "./components.js";
 import { removeLocalStorage } from "./basket.js";
-import { cost } from "./render.js";
+import { updateCostElement } from "./render.js";
 import { resetAllFilter } from "./filter.js";
 import { PRODUCT_ATTRS } from "./attrs.js";
 import { LIST_BUTTONS } from "./attrs.js";
@@ -95,7 +95,7 @@ document.addEventListener("click", (e) => {
 
     // Add product to Local Storage --------------------------------
     if (e.target.closest(`[${LIST_BUTTONS.btnAddInLS}]`)) {
-        const productCard = e.target.closest(`[${PRODUCT_ATTRS.productCard}]`);
+        const productCard = e.target.closest(`[${PRODUCT_ATTRS.productCardMain}]`);
         if (!productCard){
             console.error(`[CARD_PRODUCT] не має батьківського контейнера`)
             return
@@ -113,7 +113,8 @@ document.addEventListener("click", (e) => {
     }
 
     // Full remove Local Storage and Parent Container ---------------
-    if (e.target.classList.contains(`[${LIST_BUTTONS.btnResetLocalStorage}]`)) {
+    if (e.target.closest(`[${LIST_BUTTONS.btnResetLocalStorage}]`)) {
+        console.log('YES')
         localStorage.clear();
         const parentsBlock = document.querySelector(`[${PRODUCT_ATTRS.productParentContainer}]`);
         parentsBlock.replaceChildren();
@@ -181,5 +182,5 @@ document.addEventListener('counter:change', (e) => {
     const quantity = Number(value)
 
 
-    cost(costProduct, priceProduct, quantity);
+    updateCostElement(costProduct, priceProduct, quantity);
 })

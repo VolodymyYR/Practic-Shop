@@ -40,7 +40,7 @@
 .quantity {
     display: flex;
     height: 40px;
-    border: #eee solid 1px;
+    border: var(--border);
     justify-content: space-between;
 
 }
@@ -51,7 +51,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background: #eee;
+    background: var(--color-surface);
 }
 .quantity-btn-plus {
 }
@@ -99,14 +99,14 @@ input[type=number] {
 }
 
 .radio-button__input:checked + .radio-button__decor{
-    border: 3px solid #e4c200;
+    border: var(--border-fatty--active);
 }
 
 .radio-button__decor {
     position: absolute;
     width: 100%;
     height: 100%;
-    border: 3px solid #eee;
+    border: var(--border-fatty);
     border-radius: 50%;
     overflow: hidden;
 }
@@ -125,7 +125,7 @@ input[type=number] {
     transform: translate(-50%, -50%);
     z-index: 10;
     content: "✓";
-    color: #e4c200;
+    color: var(--color-accent);
     font-weight: 900;
     font-size: 18px;
 }
@@ -141,7 +141,7 @@ input[type=number] {
 }
 
 .radio-button__input:checked + .radio-button__decor.decor--content::before{
-    color: #e4c200;
+    color: var(--color-accent);
 }
 
 /* ========================== */
@@ -153,7 +153,7 @@ input[type=number] {
 }
 
 .price__old {
-    color: rgba(0, 0, 0, 0.3);
+    color: var(--color-disabled);
     text-decoration: line-through;
     font-size: 14px;
     font-weight: 900;
@@ -167,8 +167,8 @@ input[type=number] {
 }
 .price__discount {
     border-radius: 8px;
-    border: 1px solid #ed7b7b;
-    color: #ed7b7b;
+    border: var(--border-fatty--active);
+    color: var(--color-accent);
     padding: 4px 8px;
     font-size: 12px;
     font-weight: 600;

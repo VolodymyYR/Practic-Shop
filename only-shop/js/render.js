@@ -25,15 +25,19 @@ const calculatePriceDiscount = (price, discount) => {
     return Math.round(p * (1 - d));
 } 
 
-const tagDiscount = (discount) => `<div class="price__discount">${parseFloat(discount) * 100}%</div>`
+const tagDiscount = (discount) => `<div class="price__discount">${Math.round(parseFloat(discount) * 100)}%</div>`
 
 const priceProductBlock = (itemProduct, showBadge) => {
-    const badge = showBadge ? tagDiscount(itemProduct.discount) : '';
+    const badge = (itemProduct.discount && showBadge) ? tagDiscount(itemProduct.discount) : '';
+
+    const priceOld = itemProduct.discount ? `<div class="price__old">${itemProduct.price}</div>` : '';
+
+    const actualPrice = itemProduct.discount ? calculatePriceDiscount(itemProduct.price, itemProduct.discount) : itemProduct.price;
 
     return `
-        <div class="price__old">${itemProduct.price}</div>
+        ${priceOld}
         <div class="price__now">
-            <span>${calculatePriceDiscount(itemProduct.price, itemProduct.discount)}</span>
+            <span>${actualPrice}</span>
             ${badge}
         </div>
     `
@@ -55,7 +59,7 @@ const optionsProductContainer = (itemProduct) => {
 const optionsProduct = (options) => {
     return options.values.map(value =>`
     <label class="options__item radio-button">
-        <input class="radio-button__input" value="${value}" type="radio" name="${options.type}" id="">
+        <input class="radio-button__input" value="${value}" type="radio" name="${options.type}">
         <span class="radio-button__decor ${options.type === 'size' ? '_size' : ''}" ${options.type === 'size' ? `data-size="${value}"` : `style="--${options.type}-product: ${value};"`}></span>
     </label>
 `).join('');
@@ -63,7 +67,7 @@ const optionsProduct = (options) => {
 
 // ---------------------------------------------------------------
 
-export let cost = (costBlock, price, quantity) =>{
+export let updateCostElement = (costBlock, price, quantity) =>{
     costBlock.textContent = price * parseInt(quantity);
 } 
 
@@ -195,7 +199,7 @@ export function renderBasketCard(products){
 
             // ЗІрковий рейтинг
             const ratingStars = cardElement.querySelector(`[${PRODUCT_ATTRS.productRatingStars}]`);
-            if (ratingStars && product.rating != undefined){
+            if (ratingStars && product.rating !== undefined){
                 ratingStars.style.setProperty('--rating-percent', product.rating ? `${(product.rating / 5) * 100}%` : '0%');
             } else {
                 ratingStars?.remove();
@@ -235,6 +239,10 @@ export function renderBasketCard(products){
             const quantity = cardElement.querySelector(`[${COUNTER.counter}]`);
             if(quantity){
                 const input = quantity.querySelector('input');
+                if(!input){
+                    console.error(`[BasketCard] в лічильнику ${quantity} відсутній input`)
+                    return
+                }
                 input.value = product.quantity
             }
 
@@ -242,7 +250,7 @@ export function renderBasketCard(products){
             const wholeRow = cardElement.querySelector(`[${PRODUCT_ATTRS.productCostBlock}]`);
             if(wholeRow){
                 // const whole = wholeRow.querySelector('b');
-                cost(wholeRow, product.price, product.quantity);
+                updateCostElement(wholeRow, product.price, product.quantity);
             }
 
             // чи є даний продукт

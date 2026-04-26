@@ -1,0 +1,61 @@
+:root{
+    --color-surface: #f8f8f8; 
+    --color-surface-alt: transparent;
+    --color-border: rgba(0, 0, 0, 0.1);
+    --color-divider: rgba(0, 0, 0, 0.1);
+
+    --color-text-primary: #000000;
+    --color-text-secondary: color-mix(in srgb, var(--color-text-primary), transparent 35%);
+    --color-text-inverse: #fcfcfc;
+
+    --color-primary: #f4f4f4;
+    --color-secondary: #ededed;
+    --color-accent: #ffc933;
+    --color-disabled: rgba(0, 0, 0, 0.6);
+
+    --color-button: #ff3d3d;
+    --color-button--hover: color-mix(in srgb, var(--color-button), white 15%);
+    --color-button--active: color-mix(in srgb, var(--color-button), black 15%);
+
+    --color-box-shadow: rgba(0, 0, 0, 0.15);
+
+    /* -------------------- */
+    --screen-width-min: 320px;
+    --screen-width-max: 1700px;
+
+    --container-main-padding: 0 15px;
+
+    --box-shadow: 0px 0px 15px 1px var(--color-box-shadow);
+    --box-shadow--hover: 0px 0px 20px 1px var(--color-box-shadow);
+    --box-shadow--active: 0px 0px 17px 1px var(--color-box-shadow);
+
+    --font-primary-size: 16px;
+    --font-primary-weight: 400;
+    --font-primary-lh: 1.5;
+    --font-size-mini: 12px;
+    
+    --weight-title: 600;
+    --weight-accent: 700;
+
+    --btn-padding: 8px 16px; 
+
+    --card-padding-y: 25px;
+    --card-padding-x: 25px;
+    --card-padding-general: var(--card-padding-y) var(--card-padding-x);
+    --card-border-radius: 30px;
+    --card-br-mini-element: calc(var(--card-border-radius) / 3);
+
+    --padding-box: 8px;
+    --padding-banner: 5px 10px;
+
+
+    --border: 1px solid var(--color-border);
+    --border-accent: 1px solid var(--color-accent);
+    --border-fatty: 3px solid var(--color-border);
+    --border-fatty--active: 3px solid var(--color-accent);
+
+    --background-actions: color-mix(in srgb, var(--color-surface), transparent 40%);
+
+    --row-gap-standard: 20px;
+    --row-gap-minimum: calc(var(--row-gap-standard) / 2);
+}

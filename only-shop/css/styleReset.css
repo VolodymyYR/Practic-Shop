@@ -3,11 +3,15 @@
 html,
 body{
     height: 100%;
-    min-width: 320px;  
+    min-width: var(--screen-width-min);  
+
+    font-size: var(--font-primary-size);
+    line-height: var(--font-primary-lh);
 }
 
 body{
     font-family: 'm', sans-serif;
+    background: var(--color-primary);
 }
 
 *{
@@ -75,8 +79,8 @@ li{
 }
 
 [class*=_container] {
-    max-width: 1700px;
+    max-width: var(--screen-width-max);
     margin: 0 auto;
-    padding: 0 15px;
+    padding: var(--container-main-padding);
 }
 

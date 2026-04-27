@@ -1,4 +1,4 @@
-public class ImageService : IImageInterface
+public class ImageService : IImageService
 {
     private readonly string uploadsFolder;
     private readonly string[] allowedExtentions = {".png", "jpeg", "webp", "jpg"};

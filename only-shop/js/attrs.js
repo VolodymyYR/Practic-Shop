@@ -1,5 +1,5 @@
 export const PRODUCT_ATTRS = {
-    productCardBasket: 'data-js-basket-product',
+    тBasket: 'data-js-basket-product',
     productCardMain: 'data-js-main-product',
 
     productTitle: 'data-js-product-title',

@@ -1,8 +1,10 @@
 :root{
     --color-surface: #f8f8f8; 
-    --color-surface-alt: transparent;
+    --color-surface-alt: #fcfcfc;
     --color-border: rgba(0, 0, 0, 0.1);
     --color-divider: rgba(0, 0, 0, 0.1);
+    --color-data-entry: color-mix(in srgb, var(--color-surface), black 2%);
+    --color-selected: #2563eb;
 
     --color-text-primary: #000000;
     --color-text-secondary: color-mix(in srgb, var(--color-text-primary), transparent 35%);

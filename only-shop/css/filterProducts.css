@@ -40,12 +40,12 @@
 /* =================== BUTTONS FILTER ==================================================== */
 /* ======================================================================================= */
 
-.button-filter {
+/* .button-filter {
     padding: 8px 14px;
     width: 100%;
     border-radius: 10px;
-    background: #fff;
-}
+    background: var(----color-surface-al);
+} */
 
 /* ======================================================================================= */
 /* ==================== PRICE FILTER ===================================================== */
@@ -54,9 +54,9 @@
 .price-filter {
     width: 100%;
     padding: 20px;
-    background: #fff;
+    background: var(----color-surface-al);
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: var(--box-shadow);
     font-family: sans-serif;
 }
 
@@ -77,9 +77,9 @@
     outline: none;
     font-size: 14px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: var(--border);
     padding: 0 10px;
-    background: #fff;
+    background: var(--color-data-entry);
 }
 
 .separator {
@@ -94,7 +94,7 @@
 .slider-container {
     height: 5px;
     position: relative;
-    background: #ddd;
+    background: var(--color-data-entry);
     border-radius: 5px;
     margin-bottom: 30px;
 }
@@ -105,7 +105,7 @@
     right: 25%;
     position: absolute;
     border-radius: 5px;
-    background: #2563eb;
+    background: var(--color-selected);
 }
 
 .range-input {
@@ -128,10 +128,10 @@ input[type="range"]::-webkit-slider-thumb {
     height: 17px;
     width: 17px;
     border-radius: 50%;
-    background: #2563eb;
+    background: var(--color-selected);
     pointer-events: auto;
     -webkit-appearance: none;
-    box-shadow: 0 0 6px rgba(0,0,0,0.05);
+    box-shadow: var(--box-shadow);
     cursor: pointer;
     z-index: 10;
 }
@@ -139,8 +139,8 @@ input[type="range"]::-webkit-slider-thumb {
 .filter-btn {
     width: 100%;
     padding: 10px;
-    background: #2563eb;
-    color: white;
+    background: var(--color-selected);
+    color: var(--color-data-entry);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -148,5 +148,5 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .filter-btn:hover {
-    background: #1d4ed8;
+    background: var(--color-selected);
 }

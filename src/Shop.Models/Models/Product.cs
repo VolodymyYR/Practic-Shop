@@ -15,13 +15,22 @@ public class Product
 
     public double AverageRating => Reviews.Count == 0 ? 0 : Reviews.Average(r => r.Rating);
 
-    public Product(string name, string imageUrl, decimal price, int discountPercentage, int amount)
+    public Product
+    (
+        string name, 
+        string imageUrl, 
+        decimal price, 
+        int discountPercentage, 
+        int amount, 
+        IReadOnlyCollection<int> categoryIds
+    )
     {
         SetName(name);
         SetImage(imageUrl);
         SetPrice(price);
         SetDiscountPercentage(discountPercentage);
         SetAmount(amount);
+        SetCategories(categoryIds);
     }
 
     private Product() {}
@@ -97,5 +106,18 @@ public class Product
         }
         
         _categories.Remove(productCategory);
+    }
+
+    public void SetCategories(IReadOnlyCollection<int> categoryIds)
+    {
+        if (categoryIds == null || categoryIds.Any())
+        {
+            throw new Exception("Product must have at least one category");
+        }
+
+        foreach (var categoryId in categoryIds)
+        {
+            AddCategory(categoryId);
+        }
     }
 }

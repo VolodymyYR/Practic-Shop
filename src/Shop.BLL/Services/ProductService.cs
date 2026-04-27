@@ -1,7 +1,11 @@
-public class ProductService(ProductRepository repository)
+public class ProductService(IProductRepository repository) : IProductService
 {
-    public void CreateAsync(CreateProductDto dto)
+    public async Task CreateAsync(CreateProductDto dto)
     {
-        var Product
+        var product = dto.ToEntity();
+
+        await repository.AddAsync(product);
+
+        await repository.SaveAsync();
     }
 }

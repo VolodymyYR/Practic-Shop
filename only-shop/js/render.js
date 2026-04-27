@@ -3,7 +3,8 @@
 import { runRow } from "./effects.js";
 import { mainCardProduct } from "./componentsHTML.js";
 import { basketCardProduct } from "./componentsHTML.js";
-import { COUNTER, PRODUCT_ATTRS } from "./attrs.js";
+import { COUNTER } from "./attrs.js";
+import { PRODUCT_ATTRS } from "./attrs.js"
 
 // ================================ GLOBAL FUNCTIONS ================================
 // ==================================================================================

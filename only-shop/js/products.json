@@ -33,7 +33,7 @@
         "rating": 4.1,
         "reviewsQuantity": 16,
         "specialOffer": true,
-        "availability": "Закінчується",
+        "availability": "Відсутній",
         "options": [
             {
                 "type": "size",
@@ -91,7 +91,7 @@
         "price": 1550,
         "category": ["chairs"],
         "rating": 0, 
-        "availability": "Очікується"
+        "availability": "В дорозі"
     },
     {
         "image": "https://placehold.co/400x400/fffde7/fbc02d?text=Pikachu+Toy",

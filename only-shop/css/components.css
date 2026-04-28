@@ -40,7 +40,7 @@
 .quantity {
     display: flex;
     height: 40px;
-    border: var(--border);
+    border: var(--border-fine) var(--border-type-standard) var(--color-border); 
     justify-content: space-between;
 
 }
@@ -99,14 +99,14 @@ input[type=number] {
 }
 
 .radio-button__input:checked + .radio-button__decor{
-    border: var(--border-fatty--active);
+    border: var(--border-fatty) var(--border-type-standard) var(--color-accent);
 }
 
 .radio-button__decor {
     position: absolute;
     width: 100%;
     height: 100%;
-    border: var(--border-fatty);
+    border: var(--border-fatty) var(--border-type-standard) var(--color-border);
     border-radius: 50%;
     overflow: hidden;
 }
@@ -137,7 +137,7 @@ input[type=number] {
 .radio-button__decor._size::before{
     content: attr(data-size);
     display: block;
-    color: #eee;
+    color: var(--color-border);
 }
 
 .radio-button__input:checked + .radio-button__decor.decor--content::before{
@@ -167,8 +167,8 @@ input[type=number] {
 }
 .price__discount {
     border-radius: 8px;
-    border: var(--border-fatty--active);
-    color: var(--color-accent);
+    border: var(--border-fine) var(--border-type-standard) var(--color-special-ofter);
+    color: var(--color-special-ofter);
     padding: 4px 8px;
     font-size: 12px;
     font-weight: 600;

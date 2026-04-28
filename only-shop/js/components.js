@@ -41,3 +41,40 @@ export const changeInput = (input) => {
     updateValue(input, input.value);
 }
 
+// ==================================================================================
+
+export function clickCounter (target){
+    const { value, input} = target;
+    if(!input || value === undefined){
+        console.error(`[BasketError]: Відсутній input або значення undefined у ${value}`, input);
+        return
+    }
+
+    const productCard = input.closest(`[${PRODUCT_ATTRS.productCardBasket}]`);
+    if(!productCard){
+        console.error(`[BasketError]: Відсутній атрибут у батьківськї картка товару ${BASKET_ATTRS.productCard}`, input)
+        return
+    }
+    const costProduct = productCard.querySelector(`[${PRODUCT_ATTRS.productCostBlock}]`);
+    if(!costProduct){
+        console.error(`[BasketError]: Відсутній блок для виведення ціни ${BASKET_ATTRS.productCostBlock}`, productCard);
+        return
+    }
+    const id = productCard.getAttribute(PRODUCT_ATTRS.productId);
+    if(!id){
+        console.error(`[BasketError]: Відсутнє id продукту ${BASKET_ATTRS.productId}`, productCard);
+        return
+    }
+    const basePriceProduct = productCard.getAttribute(PRODUCT_ATTRS.productPrice);
+    if(!basePriceProduct){
+        const id = productCard.getAttribute(PRODUCT_ATTRS.productId);
+        console.error(`[BasketError]: Відсутня ціна продукту ${BASKET_ATTRS.productPrice} у продукта ${id}`, productCard);
+        return
+    }
+
+    const priceProduct = Number(basePriceProduct);
+    const quantity = Number(value)
+
+
+    updateCostElement(costProduct, priceProduct, quantity);
+}

@@ -16,6 +16,8 @@ import { resetAllFilter } from "./filter.js";
 import { PRODUCT_ATTRS } from "./attrs.js";
 import { LIST_BUTTONS } from "./attrs.js";
 import { COUNTER } from "./attrs.js";
+import { updateBasketCounter } from "./basket.js";
+import { clickCounter } from "./components.js";
 
 
 export let allProducts = [];
@@ -110,6 +112,12 @@ document.addEventListener("click", (e) => {
             console.log(productId)
             addToBasket(productId);
         }
+
+        const counterBasketEvent = new CustomEvent('counter:change', {
+            bubbles: true,
+        });
+
+        e.target.dispatchEvent(counterBasketEvent)
     }
 
     // Full remove Local Storage and Parent Container ---------------
@@ -150,37 +158,9 @@ document.addEventListener('change', (e) => {
 // ------------------------------------------------------------------
 
 document.addEventListener('counter:change', (e) => {
-    const { value, input} = e.detail;
-    if(!input || value === undefined){
-        console.error(`[BasketError]: Відсутній input або значення undefined у ${value}`, input);
-        return
+    if (e.value !== undefined && e.value !== null && e.value !== ''){
+        clickCounter(e.detail);
     }
 
-    const productCard = input.closest(`[${PRODUCT_ATTRS.productCardBasket}]`);
-    if(!productCard){
-        console.error(`[BasketError]: Відсутній атрибут у батьківськї картка товару ${BASKET_ATTRS.productCard}`, input)
-        return
-    }
-    const costProduct = productCard.querySelector(`[${PRODUCT_ATTRS.productCostBlock}]`);
-    if(!costProduct){
-        console.error(`[BasketError]: Відсутній блок для виведення ціни ${BASKET_ATTRS.productCostBlock}`, productCard);
-        return
-    }
-    const id = productCard.getAttribute(PRODUCT_ATTRS.productId);
-    if(!id){
-        console.error(`[BasketError]: Відсутнє id продукту ${BASKET_ATTRS.productId}`, productCard);
-        return
-    }
-    const basePriceProduct = productCard.getAttribute(PRODUCT_ATTRS.productPrice);
-    if(!basePriceProduct){
-        const id = productCard.getAttribute(PRODUCT_ATTRS.productId);
-        console.error(`[BasketError]: Відсутня ціна продукту ${BASKET_ATTRS.productPrice} у продукта ${id}`, productCard);
-        return
-    }
-
-    const priceProduct = Number(basePriceProduct);
-    const quantity = Number(value)
-
-
-    updateCostElement(costProduct, priceProduct, quantity);
+    updateBasketCounter();
 })

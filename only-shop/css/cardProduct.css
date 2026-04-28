@@ -65,10 +65,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--background-opacity);
-    border: var(--border);
+    background: var(--color-transparent);
+    border: var(--border-fine) var(--border-type-standard) var(--color-border);
     padding: var(--padding-box);
-    border-radius: var(--card-border-radius);
+    border-radius: calc(var(--card-border-radius) / 5);
     cursor: pointer;
     transition: all .3s;
     width: 40px;

@@ -100,7 +100,8 @@
     gap: 20px;
     overflow: hidden;
     border-radius: 16px;
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow-3D);
+    background: var(--color-surface-alt);
 }
 
 /* ----- */
@@ -135,7 +136,7 @@
     z-index: 10;
 
     color: var(--color-text-inverse);
-    background: #ed7b7b;
+    background: var(--color-special-ofter);
 }
 
 /* ----- */
@@ -190,7 +191,7 @@
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 600;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--color-secondary);
 }
 .options__items {
     display: flex;
@@ -205,14 +206,13 @@
 }
 
 .options-size {
-    background: #fff;
 }
 
 .options-size .radio-button__decor::before{
 }
 
 .options-size .radio-button__input:checked + .radio-button__decor::before{
-    color: #e4c200;
+    color: var(--color-accent);
 }
 
 /* ----- */
@@ -245,22 +245,20 @@
     width: 100%;
     border-radius: 15px;
     padding: 8px 16px;
-    color: #fff;
+    color: var(--color-text-inverse);
     text-transform: uppercase;
     font-weight: 700;
 }
 
 [data-status-availability="В наявності"] {
-    background: #95eba3;
+    background: var(--color-fine);
     font-weight: bold;
 }
 [data-status-availability="Відсутній"] {
-    background: #eb9595;
-    color: #000;
+    background: var(--color-error);
 }
 [data-status-availability="В дорозі"] {
-    background: #d8ca06;
-    color: #000;
+    background: var(--color-accent);
 }
 
 /* ----- */
@@ -273,6 +271,6 @@
     justify-content: center;
     flex: 0 0 auto;
 
-    background: #e2e2e2;
+    background: var(--color-secondary);
     cursor: pointer;
 }

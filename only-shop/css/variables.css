@@ -1,27 +1,43 @@
 :root{
-    --color-surface: #f8f8f8; 
-    --color-surface-alt: #fcfcfc;
-    --color-border: rgba(0, 0, 0, 0.1);
-    --color-divider: rgba(0, 0, 0, 0.1);
-    --color-data-entry: color-mix(in srgb, var(--color-surface), black 2%);
-    --color-selected: #2563eb;
+    /* 1. Фони та поверхні */
+    --color-surface: #f4f5f7; /* Трохи холодніший, сучасний світло-сірий */
+    --color-surface-alt: #ffffff; /* Чистий білий для карток (кращий контраст із фоном) */
+    
+    /* 2. Бордери та роздільники */
+    --color-border: #e5e7eb; /* Краще використовувати суцільний колір замість rgba для чітких ліній */
+    --color-divider: #f3f4f6;
+    --color-data-entry: #f9fafb;
+    --color-selected: #3b82f6; /* М'якший, але насичений синій (для фільтрів/чекбоксів) */
 
-    --color-text-primary: #000000;
-    --color-text-secondary: color-mix(in srgb, var(--color-text-primary), transparent 35%);
-    --color-text-inverse: #fcfcfc;
+    /* 3. Типографіка */
+    --color-text-primary: #1f2937; /* Майже чорний (темно-сірий). Значно приємніший для читання */
+    --color-text-secondary: #6b7280; /* Збалансований сірий для другорядного тексту та цін до знижки */
+    --color-text-inverse: #ffffff;
 
-    --color-primary: #f4f4f4;
-    --color-secondary: #ededed;
-    --color-accent: #ffc933;
-    --color-disabled: rgba(0, 0, 0, 0.6);
+    /* 4. Нейтральні та акцентні кольори */
+    --color-primary: #edf0f3; 
+    --color-secondary: #d1d5db;
+    --color-accent: #fbbf24; /* Тепліший і приємніший жовтий для зірочок рейтингу */
+    --color-disabled: #9ca3af;
+    --color-transparent: rgba(0, 0, 0, 0.1); /* Ледь помітний прозорий замість 10% */
 
-    --color-button: #ff3d3d;
-    --color-button--hover: color-mix(in srgb, var(--color-button), white 15%);
-    --color-button--active: color-mix(in srgb, var(--color-button), black 15%);
+    /* 5. Статуси (Успіх, Помилка, Наявність) */
+    --color-error: #ef4444; 
+    --color-fine: #10b981; /* Більш свіжий і "чистий" смарагдово-зелений для статусу "В НАЯВНОСТІ" */
+    --color-special-ofter: #f43f5e; /* Окремий рожево-червоний для акцій, щоб він не асоціювався з помилкою */
 
-    --color-box-shadow: rgba(0, 0, 0, 0.15);
+    /* 6. Кнопки (Головна дія - Купити) */
+    --color-button: #ef4444; /* Менш "кричущий" червоний. Він все ще привертає увагу, але не ріже око */
+    --color-button--hover: #dc2626; /* При наведенні краще робити колір темнішим, а не світлішим */
+    --color-button--active: #b91c1c;
 
-    /* -------------------- */
+    /* 7. Тіні */
+    --color-box-shadow: rgba(0, 0, 0, 0.06); /* Набагато м'якша тінь. Робить картки легшими і сучаснішими */
+
+    /* --------------------------------------------------------- */
+    /* --------------------------------------------------------- */
+    /* --------------------------------------------------------- */
+
     --screen-width-min: 320px;
     --screen-width-max: 1700px;
 
@@ -30,6 +46,8 @@
     --box-shadow: 0px 0px 15px 1px var(--color-box-shadow);
     --box-shadow--hover: 0px 0px 20px 1px var(--color-box-shadow);
     --box-shadow--active: 0px 0px 17px 1px var(--color-box-shadow);
+
+    --box-shadow-3D: 0px 5px 15px 0px var(--color-box-shadow);
 
     --font-primary-size: 16px;
     --font-primary-weight: 400;
@@ -50,11 +68,10 @@
     --padding-box: 8px;
     --padding-banner: 5px 10px;
 
+    --border-fine: 1px;
+    --border-fatty: 3px;
 
-    --border: 1px solid var(--color-border);
-    --border-accent: 1px solid var(--color-accent);
-    --border-fatty: 3px solid var(--color-border);
-    --border-fatty--active: 3px solid var(--color-accent);
+    --border-type-standard: solid;
 
     --background-actions: color-mix(in srgb, var(--color-surface), transparent 40%);
 

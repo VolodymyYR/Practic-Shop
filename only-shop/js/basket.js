@@ -63,3 +63,12 @@ export function removeLocalStorage(id){
     localStorageBasket = localStorageBasket.filter(item=> parseInt(item.id) !== parseInt(id));
     saveToLocalStorage('basket', localStorageBasket);
 }
+
+// =======================================================================================================
+// =======================================================================================================
+// =======================================================================================================
+
+export function updateBasketCounter(){
+    const basketCounter = document.querySelector('[data-count]');
+    basketCounter.dataset.count = Number(basketCounter.dataset.count) + 1;
+}

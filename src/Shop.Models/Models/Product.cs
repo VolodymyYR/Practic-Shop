@@ -35,7 +35,7 @@ public class Product
 
     private Product() {}
 
-    public void SetName(string name)
+    private void SetName(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -45,7 +45,7 @@ public class Product
         Name = name;
     }
 
-    public void SetImage(string imageUrl)
+    private void SetImage(string imageUrl)
     {
         if (string.IsNullOrWhiteSpace(imageUrl))
         {
@@ -57,7 +57,7 @@ public class Product
         ImageUrl = imageUrl;
     }
 
-    public void SetPrice(decimal price)
+    private void SetPrice(decimal price)
     {
         if (price <= 0)
         {
@@ -67,7 +67,7 @@ public class Product
         Price = price;
     }
 
-    public void SetDiscountPercentage(int discountPercentage)
+    private void SetDiscountPercentage(int discountPercentage)
     {
         if (discountPercentage < 0 || discountPercentage >= 100)
         {
@@ -77,7 +77,7 @@ public class Product
         DiscountPercentage = discountPercentage;
     }
 
-    public void SetAmount(int amount)
+    private void SetAmount(int amount)
     {
         if (amount < 0)
         {
@@ -108,9 +108,9 @@ public class Product
         _categories.Remove(productCategory);
     }
 
-    public void SetCategories(IReadOnlyCollection<int> categoryIds)
+    private void SetCategories(IReadOnlyCollection<int> categoryIds)
     {
-        if (categoryIds == null || categoryIds.Any())
+        if (categoryIds == null || !categoryIds.Any())
         {
             throw new Exception("Product must have at least one category");
         }
@@ -119,5 +119,13 @@ public class Product
         {
             AddCategory(categoryId);
         }
+    }
+
+    public void UpdateDetails(string name, string imageUrl, decimal price, int discountPercentage)
+    {
+        SetName(name);
+        SetImage(imageUrl);
+        SetPrice(price);
+        SetDiscountPercentage(discountPercentage);
     }
 }

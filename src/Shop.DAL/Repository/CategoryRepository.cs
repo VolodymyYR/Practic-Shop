@@ -33,4 +33,9 @@ public class CategoryRepository(ShopContext shopContext) : ICategoryRepository
     {
         await shopContext.SaveChangesAsync();
     }
+
+    public async Task Update(Category category)
+    {
+        shopContext.Categories.Update(category);
+    }
 }

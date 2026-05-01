@@ -5,4 +5,5 @@ public interface ICategoryRepository
     Task<IEnumerable<Category>> GetAllAsync();
     Task<Category?> GetByIdAsync(int id);
     Task SaveAsync();
+    Task Update(Category category);
 }

@@ -26,11 +26,20 @@ public class ProductRepository(ShopContext shopContext) : IProductRepository
 
     public async Task<Product?> GetByIdAsync(int id)
     {
-        return await shopContext.Products.FindAsync(id);
+        return await shopContext.Products
+            .Include(p => p.Categories)
+                .ThenInclude(pc => pc.Category)
+            .Include(p => p.Reviews)
+            .FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public async Task SaveAsync()
     {
         await shopContext.SaveChangesAsync();
+    }
+
+    public async Task Update(Product product)
+    {
+        shopContext.Products.Update(product);
     }
 }

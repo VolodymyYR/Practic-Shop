@@ -12,5 +12,6 @@ public class ShopContext(DbContextOptions<ShopContext> options) : DbContext(opti
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ShopContext).Assembly);
+        RoleSeeder.Seed(modelBuilder);
     }
 }

@@ -1,4 +1,4 @@
-public record ProductRequestDto
+public record ProductRequest
 (
     string Name,
     IFormFile Image,

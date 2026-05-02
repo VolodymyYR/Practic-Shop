@@ -18,19 +18,19 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
     {
         var categories = await categoryService.GetAllAsync();
 
-        var responses = categories.Select(c => c.ToResponseDto());
+        var responses = categories.Select(c => c.ToResponse());
 
         return Ok(responses);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromForm] CategoryRequestDto dto)
+    public async Task<IActionResult> Create([FromForm] CategoryRequest request)
     {
-        var createCategoryDto = dto.ToCreateDto();
+        var createCategoryDto = request.ToCreateDto();
 
         var category = await categoryService.CreateAsync(createCategoryDto);
 
-        var response = category.ToResponseDto();
+        var response = category.ToResponse();
 
         return CreatedAtAction(nameof(Get), new {id = response.Id}, response);
     }
@@ -46,14 +46,14 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
 
     [HttpPut]
     [Route("{id}")]
-    public async Task<IActionResult> Update([FromForm] CategoryRequestDto dto, int id)
+    public async Task<IActionResult> Update([FromForm] CategoryRequest request, int id)
     {
         var category = await categoryService.GetByIdAsync(id);
 
-        var createCategoryDto = dto.ToCreateDto();
+        var createCategoryDto = request.ToCreateDto();
 
         category = await categoryService.UpdateNameAsync(createCategoryDto, id);
 
-        return Ok(category.ToResponseDto());
+        return Ok(category.ToResponse());
     }
 }

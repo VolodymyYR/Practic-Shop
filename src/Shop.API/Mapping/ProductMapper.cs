@@ -1,13 +1,13 @@
 public static class ProductMappingExtension
 {
-    public static CreateProductDto ToCreateDto(this ProductRequestDto dto, string imageUrl)
+    public static CreateProductDto ToCreateDto(this ProductRequest dto, string imageUrl)
     {
         return new CreateProductDto(dto.Name, imageUrl, dto.Price, dto.DiscountPercentage, dto.Amount, dto.Categories);
     }
 
-    public static ProductResponseDto ToResponseDto(this Product product)
+    public static ProductResponse ToResponse(this Product product)
     {
-        return new ProductResponseDto
+        return new ProductResponse
         (
             product.Id,
             product.Name,
@@ -16,7 +16,7 @@ public static class ProductMappingExtension
             product.DiscountPercentage,
             product.Amount,
             product.Categories.Select(pc => 
-                new CategoryResponseDto(pc.CategoryId, pc.Category.Name)
+                new CategoryResponse(pc.CategoryId, pc.Category.Name)
             ).ToList(),
             product.Reviews
         );

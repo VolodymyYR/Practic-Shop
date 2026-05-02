@@ -10,7 +10,7 @@ public class ProductController(IProductService productService, IImageService ima
     {
         var product = await productService.GetByIdAsync(id);
 
-        var response = product.ToResponseDto();
+        var response = product.ToResponse();
 
         return Ok(response);
     } 
@@ -20,21 +20,21 @@ public class ProductController(IProductService productService, IImageService ima
     {
         var products = await productService.GetAllAsync();
 
-        var responses = products.Select(p => p.ToResponseDto());
+        var responses = products.Select(p => p.ToResponse());
 
         return Ok(responses);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromForm] ProductRequestDto dto)
+    public async Task<IActionResult> Create([FromForm] ProductRequest request)
     {
-        var imageUrl = await imageService.SaveImageAsync(dto.Image);
-        var productCreateDto = dto.ToCreateDto(imageUrl); 
+        var imageUrl = await imageService.SaveImageAsync(request.Image);
+        var productCreateDto = request.ToCreateDto(imageUrl); 
 
         var product = await productService.CreateAsync(productCreateDto);
 
         var created = await productService.GetByIdAsync(product.Id);
-        var response = created.ToResponseDto();
+        var response = created.ToResponse();
 
         return CreatedAtAction(nameof(Get), new {id = response.Id}, response);
     }
@@ -50,15 +50,15 @@ public class ProductController(IProductService productService, IImageService ima
 
     [HttpPut]
     [Route("{id}")]
-    public async Task<IActionResult> Update([FromForm] ProductRequestDto dto, int id)
+    public async Task<IActionResult> Update([FromForm] ProductRequest request, int id)
     {
         var product = await productService.GetByIdAsync(id);
-        var imageUrl = await imageService.SaveImageAsync(dto.Image);
+        var imageUrl = await imageService.SaveImageAsync(request.Image);
 
-        var createProductDto = dto.ToCreateDto(imageUrl);
+        var createProductDto = request.ToCreateDto(imageUrl);
 
         product = await productService.UpdateAsync(createProductDto, id);
 
-        return Ok(product.ToResponseDto());
+        return Ok(product.ToResponse());
     }
 }

@@ -1,4 +1,4 @@
-public record ProductResponseDto
+public record ProductResponse
 (
     int Id,
     string Name,
@@ -6,6 +6,6 @@ public record ProductResponseDto
     decimal price,
     int DiscountPercentage,
     int Amount,
-    IReadOnlyCollection<CategoryResponseDto> Categories,
+    IReadOnlyCollection<CategoryResponse> Categories,
     IReadOnlyCollection<Review> Reviews 
 );

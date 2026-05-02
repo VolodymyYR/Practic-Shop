@@ -2,7 +2,7 @@ public class CategoryService(ICategoryRepository repository) : ICategoryService
 {
     public async Task<Category> CreateAsync(CreateCategoryDto dto)
     {
-        var category = dto.ToEntity();
+        var category = new Category(dto.Name);
 
         await repository.AddAsync(category);
         await repository.SaveAsync();

@@ -17,7 +17,6 @@ export function runRow () {
         const halfGap = gapRow / 2;
         const pauseOnHover = el.getAttribute(`${RUN_ROW.runRowPause}`) === 'true';
         const splitContent = el.getAttribute(`${RUN_ROW.runRowSplit}`) || false;
-        console.log(splitContent)
         const content = el.innerHTML;
         const widthContent = el.offsetWidth;
 

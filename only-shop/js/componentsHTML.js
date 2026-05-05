@@ -47,20 +47,23 @@ export const basketCardProduct = `
             </div>
             <div class="item-content-basket__details-order">
                 <div class="item-content-basket__details-order-main">
+
                     <div class="item-content-basket__quantity">
                         <span>Кількісь</span>
                         <div class="item-content-basket__quantity quantity" data-js-counter="">
                             <button class="quantity__btn quantity-btn-minus" data-js-counter-btn="minus">-</button>
                             <div class="quantity__block-input">
-                                <input type="number" class="quantity__input" data-js-counter-input="" value="1" min="1" max="50">
+                                <input type="number" class="quantity__input" data-js-counter-input value="1" min="1" max="50">
                             </div>
                             <button class="quantity__btn quantity-btn-plus" data-js-counter-btn="plus">+</button>
                         </div>
                     </div>
+
                     <div class="item-content-basket__cost">
                         <span>Загальна вартість:</span>
                         <b data-js-product-cost></b>
                     </div>
+
                 </div>
                 <div class="item-content-basket__status" data-js-product-status>
                     <span></span>

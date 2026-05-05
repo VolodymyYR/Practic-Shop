@@ -12,6 +12,7 @@ body{
 body{
     font-family: 'm', sans-serif;
     background: var(--color-primary);
+    color: var(--color-text-primary);
 }
 
 *{

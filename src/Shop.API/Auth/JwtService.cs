@@ -10,11 +10,20 @@ public class JwtService(IOptions<JwtOptions> options) : IJwtService
     {
         var claims = new List<Claim>()
         {
-            new Claim("name", user.Name),
-            new Claim("email", user.Email),
-            new Claim("id", user.Id.ToString()),
-            new Claim("role", user.UserRoles.First().Role.Name)
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Role, user.UserRoles.First().Role.Name)
         };
+
+        var permissions = user.UserRoles
+            .SelectMany(ur => ur.Role.RolePermissions)
+            .Select(rp => rp.Permission.Name)
+            .Distinct();
+
+        foreach (var permission in permissions)
+        {
+            claims.Add(new Claim("permission", permission));
+        }
 
         var jwtToken = new JwtSecurityToken(
             expires: DateTime.UtcNow.AddMinutes(15),

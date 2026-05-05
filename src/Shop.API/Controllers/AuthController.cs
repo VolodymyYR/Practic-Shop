@@ -19,6 +19,11 @@ public class AuthController(IAuthService authService, IJwtService jwtService) : 
 
         var token = await jwtService.GenerateToken(user);
 
-        return Ok(token);
+        HttpContext.Response.Cookies.Append("MyToken", token, new CookieOptions()
+        {
+            HttpOnly = true
+        });
+
+        return Ok();
     }
 }

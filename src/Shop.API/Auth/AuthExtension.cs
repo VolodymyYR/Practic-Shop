@@ -1,6 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authorization;
 
 public static class AuthExtension
 {
@@ -17,6 +18,18 @@ public static class AuthExtension
         serviceCollection.AddScoped<IAuthService, AuthService>();
         serviceCollection.AddScoped<IPasswordHasher, PasswordHasher>();
         serviceCollection.AddScoped<IUserRepository, UserRepository>();
+
+        serviceCollection.AddAuthorization(options =>
+        {
+            foreach (var permission in typeof(Permissions)
+                .GetFields()
+                .Select(f => f.GetValue(null)!.ToString()!))
+            {
+                options.AddPolicy(permission, p => p.AddRequirements(new PermissionRequirement(permission)));
+            }
+        });
+
+        serviceCollection.AddSingleton<IAuthorizationHandler, PermissionHadler>();
 
         serviceCollection.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(o =>

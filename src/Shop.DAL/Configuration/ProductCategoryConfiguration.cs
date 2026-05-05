@@ -7,7 +7,7 @@ public class ProductCategoryConfiguration : IEntityTypeConfiguration<ProductCate
     {
         builder.HasKey(pc => new {pc.ProductId, pc.CategoryId});
 
-        builder.HasOne(pc => pc.Product)
+        builder.HasOne<Product>()
             .WithMany(p => p.Categories)
             .HasForeignKey(pc => pc.ProductId)
             .OnDelete(DeleteBehavior.Cascade);

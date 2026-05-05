@@ -29,6 +29,16 @@ public class UserRepository(ShopContext shopContext) : IUserRepository
         return await shopContext.Users.FindAsync(id);
     }
 
+    public async Task<User?> GetByEmail(string email)
+    {
+        return await shopContext.Users
+        .Include(u => u.UserRoles)
+            .ThenInclude(ur => ur.Role)
+                .ThenInclude(r => r.RolePermissions)
+                    .ThenInclude(rp => rp.Permission)
+        .FirstOrDefaultAsync(u => u.Email == email);
+    }
+
     public async Task SaveAsync()
     {
         await shopContext.SaveChangesAsync();

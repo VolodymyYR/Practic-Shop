@@ -2,7 +2,7 @@ public class User
 {
     public int Id {get; private set;}
     public string Name {get; private set;} = string.Empty;
-    public string PassWordHash {get; private set;} = string.Empty;
+    public string PasswordHash {get; private set;} = string.Empty;
     public string Email {get; private set;} = string.Empty;
 
     private List<UserRole> _userRoles = new ();
@@ -10,10 +10,10 @@ public class User
 
     private User(){}
 
-    public User(string name, string passWordHash, string email)
+    public User(string name, string passwordHash, string email)
     {
         SetName(name);
-        SetPassWordHash(passWordHash);
+        SetPasswordHash(passwordHash);
         SetEmail(email);
     }
 
@@ -27,14 +27,14 @@ public class User
         Name = name;
     }
 
-    public void SetPassWordHash(string passWordHash)
+    public void SetPasswordHash(string passWordHash)
     {
         if (string.IsNullOrWhiteSpace(passWordHash))
         {
             throw new Exception("PassWordHash cannot be empty");
         }
 
-        PassWordHash = passWordHash;
+        PasswordHash = passWordHash;
     }
 
     public void SetEmail(string email)

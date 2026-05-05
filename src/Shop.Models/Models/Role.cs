@@ -6,6 +6,24 @@ public class Role
     private List<RolePermission> _rolePermissions = new ();
     public IReadOnlyCollection<RolePermission> RolePermissions => _rolePermissions;
 
+    private Role(){}
+
+    public Role(int id, string name)
+    {
+        Id = id;
+        SetName(name);
+    }
+
+    public void SetName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new Exception("Invalid role name!");
+        }
+
+        Name = name;
+    }
+    
     public void AddRolePermission(int permissionId)
     {
         if (_rolePermissions.Any(p => p.PermissionId == permissionId))

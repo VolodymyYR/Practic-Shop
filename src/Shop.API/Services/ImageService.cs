@@ -26,7 +26,7 @@ public class ImageService : IImageService
         File.Delete(filePath);
     }
 
-    public async Task<string> SaveImageAsync(IFormFile file)
+    public async Task<ImageServiceResponse> SaveImageAsync(IFormFile file)
     {
         var extension = Path.GetExtension(file.FileName).ToLower();
 
@@ -46,6 +46,6 @@ public class ImageService : IImageService
         await using var stream = new FileStream(filePath, FileMode.Create);
         await file.CopyToAsync(stream);
 
-        return fileName;
+        return new ImageServiceResponse(filePath);
     }
 }

@@ -1,0 +1,1 @@
+public record CategoriesRequest(IEnumerable<int> CategoryIds);

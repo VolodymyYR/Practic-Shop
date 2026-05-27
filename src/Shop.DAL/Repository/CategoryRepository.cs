@@ -29,6 +29,22 @@ public class CategoryRepository(ShopContext shopContext) : ICategoryRepository
         return await shopContext.Categories.FindAsync(id);
     }
 
+    public async Task<IEnumerable<Category>> GetByIdsAsync(IEnumerable<int> ids)
+    {
+        if (!ids.Any() || ids == null)
+            throw new Exception("In list must be at least one category!");
+
+        var categories = await shopContext.Categories.Where(c => ids.Contains(c.Id)).ToListAsync();
+
+        if (!categories.Any() || categories == null)
+            throw new Exception("Cannot find any categories!");
+
+        if (categories.Count() != ids.Count())
+            throw new Exception("Not all categories was found!");
+        
+        return categories;
+    }
+
     public async Task SaveAsync()
     {
         await shopContext.SaveChangesAsync();

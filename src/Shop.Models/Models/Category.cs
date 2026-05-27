@@ -1,19 +1,38 @@
+using System.Text.Json;
+
 public class Category
 {
     public int Id {get; private set;}
     public string Name {get; private set;} = string.Empty;
+    public JsonDocument? SpecificationSchema {get; private set;}
 
+    private Category(){}
     public Category(string name){
-        SetName(name);
+        Name = Validator.RequiredString(name, nameof(Name));
     }
 
-    public void SetName(string name)
+    public void SetSpecificationSchema(List<SpecificationField> fields)
     {
-        if (string.IsNullOrWhiteSpace(name))
+        var json = JsonSerializer.Serialize(fields);
+        SpecificationSchema = JsonDocument.Parse(json);
+    }
+
+    public List<SpecificationField> GetSpecificationSchema()
+    {
+        if (SpecificationSchema == null)
         {
-            throw new Exception("Name cannot be empty");
+            return new ();
         }
 
-        Name = name;
+        return JsonSerializer.Deserialize<List<SpecificationField>>
+        (
+            SpecificationSchema.RootElement.GetRawText()
+        ) 
+        ?? new();
+    }
+
+    public void UpdateName(string name)
+    {
+        Name = Validator.RequiredString(name, nameof(Name));
     }
 }

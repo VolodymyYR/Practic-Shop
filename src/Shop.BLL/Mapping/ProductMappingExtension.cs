@@ -1,7 +1,7 @@
 public static class ProductMappingExtension
 {
-    public static Product ToEntity(this CreateProductDto dto)
+    public static Product ToEntity(this CreateProductDto dto, IReadOnlyCollection<Category> categories)
     {
-        return new Product(dto.Name, dto.ImageUrl, dto.Price, dto.DiscountPercentage, dto.Amount, dto.Categories);
+        return new Product(dto.Name, categories, dto.ProductVariants.Select(pv => pv.ToEntity()).ToList());
     }
 }

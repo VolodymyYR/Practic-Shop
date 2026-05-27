@@ -1,0 +1,1 @@
+public record ImageRequest(IFormFile Image);

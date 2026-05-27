@@ -4,6 +4,20 @@ public class CategoryService(ICategoryRepository repository) : ICategoryService
     {
         var category = new Category(dto.Name);
 
+        if (dto.Fields?.Any() == true)
+        {
+            var fields = dto.Fields.Select(f => new SpecificationField(
+                f.Key,
+                f.Label,
+                f.Type,
+                f.Required,
+                f.Values
+            ))
+            .ToList();
+
+            category.SetSpecificationSchema(fields);
+        }
+
         await repository.AddAsync(category);
         await repository.SaveAsync();
 
@@ -23,7 +37,7 @@ public class CategoryService(ICategoryRepository repository) : ICategoryService
 
         if (categories == null)
         {
-            throw new NullReferenceException("Cannot get categories!");
+            throw new Exception("Cannot get categories!");
         }
 
         return categories;
@@ -35,22 +49,43 @@ public class CategoryService(ICategoryRepository repository) : ICategoryService
 
         if (category == null)
         {
-            throw new NullReferenceException($"Cannot find category with id {id}!");
+            throw new Exception($"Cannot find category with id {id}!");
         }
 
         return category;
     }
 
-    public async Task<Category> UpdateNameAsync(CreateCategoryDto dto, int id)
+    public async Task<IEnumerable<Category>> GetAllByIds(IEnumerable<int> ids)
+    {   
+        return await repository.GetByIdsAsync(ids);
+    }
+
+    public async Task<IEnumerable<SpecificationField>> GetFullSpecSchema(IEnumerable<Category> categories)
+    {
+        if (!categories.Any() || categories == null)
+            throw new Exception("Request must contain at least one category!");
+
+        var schema = categories
+            .Where(c => c.GetSpecificationSchema() != null)
+            .SelectMany(c => c.GetSpecificationSchema())
+            .ToList();
+
+        if (!schema.Any())
+            throw new Exception("Cannot find any schema!");
+
+        return schema;
+    }
+
+    public async Task<Category> UpdateNameAsync(string name, int id)
     {
         var category = await repository.GetByIdAsync(id);
 
         if (category == null)
         {
-            throw new ArgumentNullException($"Cannot update category with id {id}");
+            throw new Exception($"Cannot update category with id {id}");
         }
 
-        category.SetName(dto.Name);
+        category.UpdateName(name);
 
         await repository.Update(category);
         await repository.SaveAsync();

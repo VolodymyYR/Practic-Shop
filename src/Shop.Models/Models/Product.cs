@@ -2,10 +2,15 @@ public class Product
 {
     public int Id {get; private set;}
     public string Name {get; private set;} = string.Empty;
-    public string ImageUrl {get; private set;} = string.Empty;
-    public decimal Price {get; private set;}
-    public int DiscountPercentage {get; private set;} = 0;
-    public int Amount {get; private set;} = 0;
+
+    public string CoverImageUrl => Variants.Any() ? Variants.FirstOrDefault()?.ImageUrl! : DefaultFields.ImageUrl;
+    public decimal MinPrice => Variants.Any() ? Variants.Min(v => v.Price) : 0;
+    public int MaxDiscountPercentage => Variants.Any() ? Variants.Max(v => v.DiscountPercentage) : 0;
+    public int TotalStock => Variants.Sum(v => v.StockQuantity);
+    public double AverageRating => Reviews.Count == 0 ? 0 : Reviews.Average(r => r.Rating);
+
+    private readonly List<ProductVariant> _variants = new();
+    public IReadOnlyCollection<ProductVariant> Variants => _variants;
 
     private readonly List<ProductCategory> _categories = new ();
     public IReadOnlyCollection<ProductCategory> Categories => _categories;
@@ -13,87 +18,78 @@ public class Product
     private readonly List<Review> _reviews = new ();
     public IReadOnlyCollection<Review> Reviews => _reviews;
 
-    public double AverageRating => Reviews.Count == 0 ? 0 : Reviews.Average(r => r.Rating);
+    private Product() {}
 
     public Product
     (
-        string name, 
-        string imageUrl, 
-        decimal price, 
-        int discountPercentage, 
-        int amount, 
-        IReadOnlyCollection<int> categoryIds
+        string name,
+        IReadOnlyCollection<Category> Categories,
+        IReadOnlyCollection<ProductVariant> variants
     )
     {
-        SetName(name);
-        SetImage(imageUrl);
-        SetPrice(price);
-        SetDiscountPercentage(discountPercentage);
-        SetAmount(amount);
-        SetCategories(categoryIds);
+        Name = Validator.RequiredString(name, nameof(Name));
+        SetCategories(Categories);
+        SetProductVariant(variants);
     }
 
-    private Product() {}
-
-    private void SetName(string name)
+    public void UpdateDetails(string name)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new Exception("Name cannot be empty");
-        }
-
-        Name = name;
+        Name = Validator.RequiredString(name, nameof(Name));
     }
 
-    private void SetImage(string imageUrl)
+    public void AddVariant(ProductVariant variant)
     {
-        if (string.IsNullOrWhiteSpace(imageUrl))
-        {
-            throw new Exception("Url cannot be empty");
-        }
+        if (_variants.Any(v => v.ArticleCode == variant.ArticleCode))
+            throw new Exception("Cannot add duplicate variant");
 
-        // перевірка чи посилання на фото валідне, хоча думаю що воно буде заливатись
+        var schema = _categories
+            .Select(pc => pc.Category)
+            .Where(c => c.GetSpecificationSchema() != null)
+            .SelectMany(c => c.GetSpecificationSchema())
+            .ToList();
 
-        ImageUrl = imageUrl;
+        var missingFields = schema
+            .Where(f => f.Required && !variant.Specifications.RootElement.TryGetProperty(f.Key, out _))
+            .Select(f => f.Key)
+            .ToList();
+
+        if (missingFields.Any())
+            throw new Exception("Cannot add variand, missing required fields");
+
+        _variants.Add(variant);       
     }
 
-    private void SetPrice(decimal price)
+    public void RemoveVariant(int id)
     {
-        if (price <= 0)
-        {
-            throw new Exception("Price must be greater than zero");
-        }
+        var variant = Variants.FirstOrDefault(v => v.Id == id);
 
-        Price = price;
+        if(!Variants.Any() || variant == null)
+            throw new Exception($"Cannot find variant with {id}!");
+
+        _variants.Remove(variant);
     }
 
-    private void SetDiscountPercentage(int discountPercentage)
+    public void AddCategory(Category category)
     {
-        if (discountPercentage < 0 || discountPercentage >= 100)
-        {
-            throw new Exception("Dicount cannot be grater than 100 and less than 0");
-        }
+        if (_categories.Any(c => c.CategoryId == category.Id))
+            throw new Exception("Cannot add duplicate category");
 
-        DiscountPercentage = discountPercentage;
-    }
+        var existingFields = _categories
+            .Select(pc => pc.Category)
+            .Where(c => c.SpecificationSchema != null)
+            .SelectMany(c => c.GetSpecificationSchema())
+            .Select(f => f.Key)
+            .ToHashSet();
 
-    private void SetAmount(int amount)
-    {
-        if (amount < 0)
-        {
-            throw new Exception("Amount cannot be less than 0");
-        }
+        var conflicts = category.GetSpecificationSchema()
+            .Select(f => f.Key)
+            .Where(f => existingFields.Contains(f))
+            .ToList();
 
-        Amount = amount;
-    }
+        if (conflicts.Any())
+            throw new Exception($"Category conflict! in fields {string.Join(", ", conflicts)}");
 
-    public void AddCategory(int categoryId)
-    {
-        if (_categories.Any(c => c.CategoryId == categoryId))
-        {
-            throw new Exception("Категорії не можуть дублюватись");
-        }
-        _categories.Add(new ProductCategory(categoryId));
+        _categories.Add(new ProductCategory(category.Id, category));
     }
 
     public void RemoveCategory(int categoryId)
@@ -101,31 +97,32 @@ public class Product
         var productCategory = _categories.FirstOrDefault(c => c.CategoryId == categoryId);
 
         if (productCategory is null)
-        {
-            throw new Exception("Категорія для видалення відсутня!");
-        }
+            throw new Exception($"Cannot delete category with id {categoryId}, dont exist");
         
         _categories.Remove(productCategory);
     }
 
-    private void SetCategories(IReadOnlyCollection<int> categoryIds)
-    {
-        if (categoryIds == null || !categoryIds.Any())
-        {
-            throw new Exception("Product must have at least one category");
-        }
 
-        foreach (var categoryId in categoryIds)
+
+    public void SetProductVariant(IReadOnlyCollection<ProductVariant> variants)
+    {
+        if (variants == null || !variants.Any())
+            throw new Exception("Product must have at least one variant");
+
+        foreach (var variant in variants)
         {
-            AddCategory(categoryId);
+            AddVariant(variant);
         }
     }
 
-    public void UpdateDetails(string name, string imageUrl, decimal price, int discountPercentage)
+    private void SetCategories(IReadOnlyCollection<Category> categories)
     {
-        SetName(name);
-        SetImage(imageUrl);
-        SetPrice(price);
-        SetDiscountPercentage(discountPercentage);
+        if (categories == null || !categories.Any())
+            throw new Exception("Product must have at least one category");
+
+        foreach (var category in categories)
+        {
+            AddCategory(category);
+        }
     }
 }

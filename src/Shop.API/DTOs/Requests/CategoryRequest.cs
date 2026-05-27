@@ -1,4 +1,5 @@
 public record CategoryRequest
 (
-    string Name
+    string Name,
+    List<SpecificationFieldDto>? Fields
 );

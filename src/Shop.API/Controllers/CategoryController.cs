@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -5,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 public class CategoryController(ICategoryService categoryService) : ControllerBase
 {
     [HttpGet]
-    [Route("{Id}")]
+    [Route("{id}")]
     public async Task<IActionResult> Get(int id)
     {
         var category = await categoryService.GetByIdAsync(id);
@@ -23,8 +24,26 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
         return Ok(responses);
     }
 
+    [HttpGet("byIds")]
+    public async Task<IActionResult> GetByIds([FromQuery] CategoriesRequest request)
+    {
+        var categories = await categoryService.GetAllByIds(request.CategoryIds);
+
+        return Ok(categories);
+    }
+
+    [HttpGet("getSchema")]
+    public async Task<IActionResult> GetFullSpecSchema([FromQuery] List<int> ids)
+    {
+        var categories = await categoryService.GetAllByIds(ids);
+        var schema = await categoryService.GetFullSpecSchema(categories);
+
+        return Ok(schema);
+    }
+
     [HttpPost]
-    public async Task<IActionResult> Create([FromForm] CategoryRequest request)
+    //[Authorize(Policy = Permissions.CategoryCreate)]
+    public async Task<IActionResult> Create([FromBody] CategoryRequest request)
     {
         var createCategoryDto = request.ToCreateDto();
 
@@ -37,6 +56,7 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
 
     [HttpDelete]
     [Route("{id}")]
+    [Authorize(Policy = Permissions.CategoryDelete)]
     public async Task<IActionResult> Delete(int id)
     {
         await categoryService.DeleteAsync(id);
@@ -46,13 +66,12 @@ public class CategoryController(ICategoryService categoryService) : ControllerBa
 
     [HttpPut]
     [Route("{id}")]
-    public async Task<IActionResult> Update([FromForm] CategoryRequest request, int id)
+    [Authorize(Policy = Permissions.CategoryEdit)]
+    public async Task<IActionResult> Update([FromForm] string name, int id)
     {
         var category = await categoryService.GetByIdAsync(id);
 
-        var createCategoryDto = request.ToCreateDto();
-
-        category = await categoryService.UpdateNameAsync(createCategoryDto, id);
+        category = await categoryService.UpdateNameAsync(name, id);
 
         return Ok(category.ToResponse());
     }

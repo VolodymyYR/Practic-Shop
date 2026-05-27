@@ -10,9 +10,9 @@ public class JwtService(IOptions<JwtOptions> options) : IJwtService
     {
         var claims = new List<Claim>()
         {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.Role, user.UserRoles.First().Role.Name)
+            new Claim("userId", user.Id.ToString()),
+            new Claim("email", user.Email),
+            new Claim("role", user.UserRoles.First().Role.Name)
         };
 
         var permissions = user.UserRoles

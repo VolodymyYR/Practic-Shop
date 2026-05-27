@@ -5,7 +5,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDatabase(connectionString);
+builder.Services.AddDatabase(connectionString!);
 
 builder.Services.AddControllers();
 
@@ -15,6 +15,9 @@ builder.Services.AddScoped<IImageService, ImageService>();
 //Product
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductVariantService, ProductVariantService>();
+builder.Services.AddScoped<IProductVariantRepository, ProductVariantRepository>();
+
 
 
 // Category

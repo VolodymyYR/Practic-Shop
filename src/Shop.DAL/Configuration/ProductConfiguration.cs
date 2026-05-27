@@ -8,16 +8,19 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.Name)
             .HasMaxLength(100);
 
-        builder.Property(p => p.ImageUrl)
-            .HasMaxLength(500);
-
-        builder.Property(p => p.Price)
-            .HasPrecision(18, 2);
+        builder.Ignore(p => p.CoverImageUrl);
+        builder.Ignore(p => p.MinPrice);
+        builder.Ignore(p => p.MaxDiscountPercentage);
+        builder.Ignore(p => p.TotalStock);
+        builder.Ignore(p => p.AverageRating);
 
         builder.Navigation(p => p.Reviews)
             .UsePropertyAccessMode(PropertyAccessMode.Field);
 
         builder.Navigation(p => p.Categories)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+        builder.Navigation(p => p.Variants)
             .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 }

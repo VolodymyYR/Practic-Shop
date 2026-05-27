@@ -27,11 +27,18 @@ public class ProductRepository(ShopContext shopContext) : IProductRepository
     public async Task<Product?> GetByIdAsync(int id)
     {
         return await shopContext.Products
+            .Include(p => p.Variants)
             .Include(p => p.Categories)
                 .ThenInclude(pc => pc.Category)
             .Include(p => p.Reviews)
             .FirstOrDefaultAsync(p => p.Id == id);
     }
+
+    public IQueryable<Product> GetQueryable()
+    {
+        return shopContext.Products.AsQueryable();
+    }
+
 
     public async Task SaveAsync()
     {

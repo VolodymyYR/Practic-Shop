@@ -1,0 +1,1 @@
+public  record ImageServiceResponse(string Url);

@@ -9,8 +9,9 @@ public class ProductCategory
     
     private ProductCategory(){}
 
-    public ProductCategory(int categoryId)
+    public ProductCategory(int categoryId, Category category)
     {
         CategoryId = categoryId;
+        Category = category;
     }
 }
